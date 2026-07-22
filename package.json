@@ -1,0 +1,21 @@
+{
+  "name": "hasp-key",
+  "version": "0.1.0",
+  "description": "HASP: Hold Any-provider Secrets Privately. A bring-your-own-key holder for AI apps. Your key stays in your browser, never on a server.",
+  "keywords": ["byok", "api-key", "anthropic", "openai", "ai", "bring-your-own-key", "provider"],
+  "license": "MIT",
+  "author": "Regis Chapman",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./react": "./src/react.tsx"
+  },
+  "files": ["src"],
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": { "optional": true }
+  }
+}
