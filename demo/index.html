@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HASP demo</title>
+<style>
+  :root {
+    --color-bg-subtle:#eef1f6; --color-surface:#ffffff; --color-border:#d4dae2;
+    --color-text-primary:#1b1e22; --color-text-secondary:#5a636e;
+    --color-accent-solid:#1e4e8c; --color-text-on-accent:#ffffff;
+    --color-overlay:rgba(20,22,26,0.45);
+  }
+  [data-theme="dark"] {
+    --color-bg-subtle:#14161a; --color-surface:#1e2126; --color-border:#363b42;
+    --color-text-primary:#e8eaed; --color-text-secondary:#9aa3ad;
+    --color-accent-solid:#5a8fd6; --color-text-on-accent:#0b0d10;
+    --color-overlay:rgba(0,0,0,0.58);
+  }
+  body { margin:0; background:var(--color-bg-subtle); color:var(--color-text-primary);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="./bundle.js"></script>
+</body>
+</html>

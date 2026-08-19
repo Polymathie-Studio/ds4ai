@@ -9,7 +9,7 @@ export {
   getProvider,
   type Provider,
   type ProviderId,
-} from './providers'
+} from './providers.js'
 
 export {
   setKey,
@@ -18,4 +18,4 @@ export {
   clearKey,
   hasKey,
   type StoreKind,
-} from './key-store'
+} from './key-store.js'

@@ -5,7 +5,7 @@
 // The store keeps one key per provider, plus the last-used provider, so an app
 // can hold, say, an Anthropic and an OpenAI key and switch between them.
 
-import { detectProvider, type ProviderId } from './providers'
+import { detectProvider, type ProviderId } from './providers.js'
 
 const PREFIX = 'hasp:key:'
 const ACTIVE = 'hasp:active'
@@ -21,14 +21,18 @@ function store(kind: StoreKind): Storage | null {
   }
 }
 
-export function setKey(key: string, kind: StoreKind = 'local'): ProviderId | null {
+// Hold a key. The provider can be given explicitly (the user's choice wins); if
+// it is not, HASP auto-detects it from the key, and if it recognizes nothing it
+// holds the key as 'other' rather than guessing a provider. No provider is ever
+// privileged as a fallback.
+export function setKey(key: string, kind: StoreKind = 'local', provider?: ProviderId): ProviderId | null {
   const s = store(kind)
   const trimmed = key.trim()
   if (!s || !trimmed) return null
-  const provider = detectProvider(trimmed) ?? 'anthropic'
-  s.setItem(PREFIX + provider, trimmed)
-  s.setItem(ACTIVE, provider)
-  return provider
+  const resolved = provider ?? detectProvider(trimmed) ?? 'other'
+  s.setItem(PREFIX + resolved, trimmed)
+  s.setItem(ACTIVE, resolved)
+  return resolved
 }
 
 export function getKey(provider?: ProviderId, kind: StoreKind = 'local'): string | null {

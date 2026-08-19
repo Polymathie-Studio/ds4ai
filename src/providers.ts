@@ -1,7 +1,7 @@
 // Client-safe provider metadata. No SDK imports, so this is safe in the browser.
 // The key never has to be recognized by a server for any of this to work.
 
-export type ProviderId = 'anthropic' | 'openai' | 'google' | 'xai' | 'mistral'
+export type ProviderId = 'anthropic' | 'openai' | 'google' | 'xai' | 'mistral' | 'other'
 
 export type Provider = {
   id: ProviderId
@@ -21,6 +21,11 @@ export const PROVIDERS: Provider[] = [
   { id: 'xai', label: 'xAI · Grok', short: 'Grok', placeholder: 'xai-...', keyUrl: 'https://console.x.ai', prefix: 'xai-', defaultModel: 'grok-2-latest' },
   { id: 'openai', label: 'OpenAI · GPT', short: 'GPT', placeholder: 'sk-...', keyUrl: 'https://platform.openai.com/api-keys', prefix: 'sk-', defaultModel: 'gpt-4o' },
   { id: 'mistral', label: 'Mistral', short: 'Mistral', placeholder: 'your Mistral key', keyUrl: 'https://console.mistral.ai/api-keys', prefix: null, defaultModel: 'mistral-large-latest' },
+  // The catch-all. Any key that is not one of the above is held here rather than
+  // guessed. It has no prefix, so it is never auto-detected; a user or an app
+  // names it. defaultModel is empty because the provider is not known: the app
+  // supplies the model. This is what makes "any-provider" literally true.
+  { id: 'other', label: 'Other provider', short: 'Other', placeholder: 'your API key', keyUrl: '', prefix: null, defaultModel: '' },
 ]
 
 export function detectProvider(key: string): ProviderId | null {

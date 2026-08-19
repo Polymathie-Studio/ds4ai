@@ -2,7 +2,12 @@
 
 **Hold Any-provider Secrets Privately.** Bring your own key.
 
-HASP is a small, dependency-free holder for AI API keys. A tool that uses it runs on the user's own key: the key is kept in the user's browser, never on a server, and the charges land on the user's own account. It auto-detects the provider from the key, so one entry field handles Anthropic, OpenAI, Google, xAI, and Mistral.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/hasp-render-dark.png">
+  <img alt="HASP rendering its bring-your-own-key modal over an app: a key entered, the provider auto-detected as Claude, and links to get a key, with the key held only in the browser." src="assets/hasp-render-light.png" width="820">
+</picture>
+
+HASP is a small, dependency-free holder for AI API keys. A tool that uses it runs on the user's own key: the key is kept in the user's browser, never on a server, and the charges land on the user's own account. It auto-detects the provider from the key, so one entry field handles Anthropic, OpenAI, Google, xAI, and Mistral, and any other key is held as `other` rather than mislabeled, so the name is literally true: it holds any provider's secret. The user, or the app, can also set the provider explicitly.
 
 It exists so apps stop rebuilding the same "paste your key" plumbing, and so the privacy posture (the key never leaves the browser) is the same everywhere.
 
@@ -15,6 +20,8 @@ Most small AI tools face the same fork: pay for every user's model calls out of 
 ```
 npm install hasp-key
 ```
+
+The package name is `hasp-key`; it is planned for npm but not yet published. Until then, use it from the repository.
 
 React is an optional peer dependency, needed only for the modal and the hook.
 
@@ -47,7 +54,7 @@ function AssistButton() {
 }
 ```
 
-`KeyModal` is lightly styled and takes `className` and `inputClassName` so it inherits your app's theme.
+`KeyModal` is lightly styled and takes `className` and `inputClassName` so it inherits your app's theme. Its default styling reads TEMPER's semantic tokens with fallbacks, so where TEMPER is present the modal follows the active theme, and where it is absent it renders a clean neutral panel.
 
 ## The privacy model
 
@@ -55,4 +62,4 @@ The key is held only in the browser. HASP never sends it anywhere. Your app deci
 
 ## License
 
-MIT, Regis Chapman.
+Apache-2.0. Copyright 2026 Regis Lloyd Chapman. See `LICENSE` and `NOTICE`.
