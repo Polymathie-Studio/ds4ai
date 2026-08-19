@@ -173,11 +173,128 @@ class GraspMenu extends HTMLElement {
   }
 }
 
+// --- Tabs: a tablist plus panels, with roving focus and arrow-key selection ---
+class GraspTabs extends HTMLElement {
+  connectedCallback() {
+    if (this._built) return;
+    this._built = true;
+    this.classList.add('grasp-tabs');
+    const list = this.querySelector('.grasp-tabs__list');
+    this._panels = Array.from(this.querySelectorAll('.grasp-tabs__panel'));
+    if (!list) return;
+    list.setAttribute('role', 'tablist');
+    this._tabs = Array.from(list.querySelectorAll('button'));
+    this._tabs.forEach((tab, i) => {
+      const panel = this._panels[i];
+      if (!tab.id) tab.id = nextId('grasp-tab');
+      tab.setAttribute('role', 'tab');
+      tab.classList.add('grasp-tabs__tab');
+      if (panel) {
+        if (!panel.id) panel.id = nextId('grasp-panel');
+        tab.setAttribute('aria-controls', panel.id);
+        panel.setAttribute('role', 'tabpanel');
+        panel.setAttribute('aria-labelledby', tab.id);
+        panel.tabIndex = 0;
+      }
+      tab.addEventListener('click', () => this._select(i));
+      tab.addEventListener('keydown', (e) => this._onKey(e, i));
+    });
+    this._select(0);
+  }
+  _select(i) {
+    this._tabs.forEach((tab, j) => {
+      const on = j === i;
+      tab.setAttribute('aria-selected', on ? 'true' : 'false');
+      tab.tabIndex = on ? 0 : -1;
+      if (this._panels[j]) this._panels[j].hidden = !on;
+    });
+  }
+  _onKey(e, i) {
+    const n = this._tabs.length;
+    let next = null;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % n;
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (i - 1 + n) % n;
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = n - 1;
+    if (next !== null) { e.preventDefault(); this._select(next); this._tabs[next].focus(); }
+  }
+}
+
+// --- Tooltip: a bubble shown on hover and focus, dismissed on Escape ---
+class GraspTooltip extends HTMLElement {
+  connectedCallback() {
+    if (this._built) return;
+    this._built = true;
+    this.classList.add('grasp-tooltip');
+    const trigger = this.querySelector('button, a, [tabindex]') || this.firstElementChild;
+    const text = this.getAttribute('text') || '';
+    if (!trigger || !text) return;
+    const tip = document.createElement('span');
+    tip.className = 'grasp-tooltip__bubble';
+    tip.setAttribute('role', 'tooltip');
+    tip.id = nextId('grasp-tooltip');
+    tip.textContent = text;
+    tip.hidden = true;
+    this.appendChild(tip);
+    trigger.setAttribute('aria-describedby', tip.id);
+    const show = () => { tip.hidden = false; };
+    const hide = () => { tip.hidden = true; };
+    trigger.addEventListener('mouseenter', show);
+    trigger.addEventListener('mouseleave', hide);
+    trigger.addEventListener('focus', show);
+    trigger.addEventListener('blur', hide);
+    trigger.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
+  }
+}
+
+// --- Accordion: header buttons that expand their panels (add `single` for one at a time) ---
+class GraspAccordion extends HTMLElement {
+  connectedCallback() {
+    if (this._built) return;
+    this._built = true;
+    this.classList.add('grasp-accordion');
+    const single = this.hasAttribute('single');
+    const headers = Array.from(this.querySelectorAll('.grasp-accordion__header'));
+    headers.forEach((header) => {
+      const panel = header.nextElementSibling;
+      if (!panel || !panel.classList.contains('grasp-accordion__panel')) return;
+      if (!header.id) header.id = nextId('grasp-acc-h');
+      if (!panel.id) panel.id = nextId('grasp-acc-p');
+      header.setAttribute('aria-expanded', 'false');
+      header.setAttribute('aria-controls', panel.id);
+      panel.setAttribute('role', 'region');
+      panel.setAttribute('aria-labelledby', header.id);
+      panel.hidden = true;
+      header.addEventListener('click', () => {
+        const open = header.getAttribute('aria-expanded') === 'true';
+        if (single && !open) {
+          headers.forEach((h) => {
+            if (h !== header) {
+              h.setAttribute('aria-expanded', 'false');
+              const p = h.nextElementSibling;
+              if (p && p.classList.contains('grasp-accordion__panel')) p.hidden = true;
+            }
+          });
+        }
+        header.setAttribute('aria-expanded', open ? 'false' : 'true');
+        panel.hidden = open;
+      });
+    });
+  }
+}
+
 if (typeof window !== 'undefined' && window.customElements) {
-  const defs = { 'grasp-field': GraspField, 'grasp-modal': GraspModal, 'grasp-menu': GraspMenu };
+  const defs = {
+    'grasp-field': GraspField,
+    'grasp-modal': GraspModal,
+    'grasp-menu': GraspMenu,
+    'grasp-tabs': GraspTabs,
+    'grasp-tooltip': GraspTooltip,
+    'grasp-accordion': GraspAccordion,
+  };
   for (const [tag, cls] of Object.entries(defs)) {
     if (!customElements.get(tag)) customElements.define(tag, cls);
   }
 }
 
-export { GraspField, GraspModal, GraspMenu };
+export { GraspField, GraspModal, GraspMenu, GraspTabs, GraspTooltip, GraspAccordion };

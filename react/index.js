@@ -135,3 +135,79 @@ export function Menu({ label, items = [], triggerVariant = 'secondary', classNam
     ),
   )
 }
+
+export function Tabs({ tabs = [] }) {
+  const [i, setI] = useState(0)
+  const refs = useRef([])
+  const base = useId()
+  const onKey = (e) => {
+    const n = tabs.length
+    let next = null
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % n
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (i - 1 + n) % n
+    else if (e.key === 'Home') next = 0
+    else if (e.key === 'End') next = n - 1
+    if (next !== null) { e.preventDefault(); setI(next); if (refs.current[next]) refs.current[next].focus() }
+  }
+  return h('div', { className: 'grasp-tabs' },
+    h('div', { className: 'grasp-tabs__list', role: 'tablist', onKeyDown: onKey },
+      tabs.map((t, j) => h('button', {
+        key: j,
+        ref: (el) => { refs.current[j] = el },
+        className: 'grasp-tabs__tab',
+        role: 'tab',
+        id: base + '-t' + j,
+        'aria-selected': j === i,
+        'aria-controls': base + '-p' + j,
+        tabIndex: j === i ? 0 : -1,
+        onClick: () => setI(j),
+      }, t.label))),
+    tabs.map((t, j) => h('div', {
+      key: j,
+      className: 'grasp-tabs__panel',
+      role: 'tabpanel',
+      id: base + '-p' + j,
+      'aria-labelledby': base + '-t' + j,
+      hidden: j !== i,
+      tabIndex: 0,
+    }, t.content)),
+  )
+}
+
+export function Tooltip({ text, children }) {
+  const [show, setShow] = useState(false)
+  const id = useId()
+  const trigger = cloneElement(Children.only(children), {
+    'aria-describedby': id,
+    onMouseEnter: () => setShow(true),
+    onMouseLeave: () => setShow(false),
+    onFocus: () => setShow(true),
+    onBlur: () => setShow(false),
+    onKeyDown: (e) => { if (e.key === 'Escape') setShow(false) },
+  })
+  return h('span', { className: 'grasp-tooltip' },
+    trigger,
+    h('span', { className: 'grasp-tooltip__bubble', role: 'tooltip', id, hidden: !show, key: 'b' }, text),
+  )
+}
+
+export function Accordion({ items = [], single = false }) {
+  const [openSet, setOpenSet] = useState(() => new Set())
+  const base = useId()
+  const toggle = (j) => setOpenSet((prev) => {
+    const isOpen = prev.has(j)
+    if (single) return isOpen ? new Set() : new Set([j])
+    const next = new Set(prev)
+    if (isOpen) next.delete(j); else next.add(j)
+    return next
+  })
+  return h('div', { className: 'grasp-accordion' },
+    items.flatMap((it, j) => {
+      const open = openSet.has(j)
+      return [
+        h('button', { key: 'h' + j, className: 'grasp-accordion__header', id: base + '-h' + j, 'aria-expanded': open, 'aria-controls': base + '-p' + j, onClick: () => toggle(j) }, it.header),
+        h('div', { key: 'p' + j, className: 'grasp-accordion__panel', id: base + '-p' + j, role: 'region', 'aria-labelledby': base + '-h' + j, hidden: !open }, it.content),
+      ]
+    }),
+  )
+}

@@ -22,6 +22,9 @@ GRASP builds on the semantic element wherever one exists and hand-rolls behavior
 - **Modal**: `<grasp-modal>` wraps a native `<dialog>`; opening moves focus in and traps it, Escape and a backdrop click close, and focus returns to the trigger.
 - **Menu**: `<grasp-menu>` carries `aria-haspopup` and `aria-expanded`, opens on click or the arrow keys, navigates with Up, Down, Home, and End, and closes on Escape or an outside click, returning focus to the trigger.
 - **Form controls**: Checkbox, Radio, Switch, and Select, native inputs styled and themed with a visible focus ring, so the keyboard and screen-reader behavior comes from the platform. The switch is a checkbox with `role="switch"`, and its motion respects `prefers-reduced-motion`. Wrap any of them in `<grasp-field>` for the label and error wiring.
+- **Tabs**: `<grasp-tabs>` wires a tablist and panels with roving focus (arrow keys, Home, End), `aria-selected`, and `aria-controls`, showing one panel at a time.
+- **Tooltip**: `<grasp-tooltip text="...">` shows a bubble on hover and focus, dismisses on Escape, and wires `aria-describedby` so a screen reader reads it.
+- **Accordion**: `<grasp-accordion>` (add `single` for one open at a time) wires each header button's `aria-expanded` and `aria-controls` to its panel.
 
 ## Quickstart
 

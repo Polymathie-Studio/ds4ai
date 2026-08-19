@@ -58,6 +58,33 @@
   </div>
 
   <div class="case">
+    <h2>Tabs</h2>
+    <grasp-tabs>
+      <div class="grasp-tabs__list"><button>Account</button><button>Security</button><button>Billing</button></div>
+      <div class="grasp-tabs__panel">Your account details.</div>
+      <div class="grasp-tabs__panel">Password and two-factor.</div>
+      <div class="grasp-tabs__panel">Plan and invoices.</div>
+    </grasp-tabs>
+  </div>
+
+  <div class="case">
+    <h2>Tooltip</h2>
+    <grasp-tooltip text="Copies the link to your clipboard">
+      <button class="grasp-button grasp-button--secondary">Share</button>
+    </grasp-tooltip>
+  </div>
+
+  <div class="case">
+    <h2>Accordion</h2>
+    <grasp-accordion>
+      <button class="grasp-accordion__header">What is included?</button>
+      <div class="grasp-accordion__panel">Everything in the free plan, plus priority support.</div>
+      <button class="grasp-accordion__header">Can I cancel?</button>
+      <div class="grasp-accordion__panel">Yes, any time, from your billing settings.</div>
+    </grasp-accordion>
+  </div>
+
+  <div class="case">
     <h2>Modal</h2>
     <button class="grasp-button grasp-button--primary" id="openModal">Open dialog</button>
     <grasp-modal heading="Edit profile" id="modal">

@@ -184,3 +184,57 @@ grasp-modal { display: contents; }
 }
 .grasp-menu__item:hover,
 .grasp-menu__item:focus-visible { background: var(--color-surface-hover, #eef1f5); outline: none; }
+
+/* Tabs. */
+.grasp-tabs__list { display: flex; gap: var(--space-1, 0.25rem); border-bottom: 1px solid var(--color-border, #d4dae2); }
+.grasp-tabs__tab {
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--color-text-secondary, #5a636e);
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: var(--font-weight-medium, 500);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.grasp-tabs__tab[aria-selected="true"] { color: var(--color-text-primary, #1b1e22); border-bottom-color: var(--color-accent-solid, #1e4e8c); }
+.grasp-tabs__tab:focus-visible { outline: var(--ring-width, 3px) solid var(--color-focus-ring, #1e4e8c); outline-offset: -2px; }
+.grasp-tabs__panel { padding: var(--space-4, 1rem) 0; }
+
+/* Tooltip. */
+.grasp-tooltip { position: relative; display: inline-block; }
+.grasp-tooltip__bubble {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 800;
+  white-space: nowrap;
+  padding: var(--space-1, 0.25rem) var(--space-2, 0.5rem);
+  background: var(--color-text-primary, #1b1e22);
+  color: var(--color-bg-base, #ffffff);
+  border-radius: var(--radius-sm, 6px);
+  font-size: var(--text-sm, 0.875rem);
+}
+
+/* Accordion. */
+.grasp-accordion__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-3, 0.75rem) 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--color-text-primary, #1b1e22);
+  font-size: var(--text-base, 1rem);
+  font-weight: var(--font-weight-semibold, 600);
+  border-bottom: 1px solid var(--color-border, #d4dae2);
+}
+.grasp-accordion__header:focus-visible { outline: var(--ring-width, 3px) solid var(--color-focus-ring, #1e4e8c); outline-offset: 2px; }
+.grasp-accordion__header::after { content: "+"; font-weight: 400; margin-left: var(--space-3, 0.75rem); }
+.grasp-accordion__header[aria-expanded="true"]::after { content: "\2212"; }
+.grasp-accordion__panel { padding: var(--space-3, 0.75rem) 0; color: var(--color-text-secondary, #5a636e); }

@@ -46,3 +46,14 @@ export interface MenuProps {
   className?: string
 }
 export function Menu(props: MenuProps): JSX.Element
+
+export interface TabItem { label: ReactNode; content: ReactNode }
+export interface TabsProps { tabs: TabItem[] }
+export function Tabs(props: TabsProps): JSX.Element
+
+export interface TooltipProps { text: string; children: ReactElement }
+export function Tooltip(props: TooltipProps): JSX.Element
+
+export interface AccordionItem { header: ReactNode; content: ReactNode }
+export interface AccordionProps { items: AccordionItem[]; single?: boolean }
+export function Accordion(props: AccordionProps): JSX.Element
