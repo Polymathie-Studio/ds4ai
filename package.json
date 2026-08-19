@@ -1,0 +1,26 @@
+{
+  "name": "grasp-ui",
+  "version": "0.1.0",
+  "description": "GRASP: operable interaction components. Accessible-by-default button, form field, modal, and menu, keyboard and screen-reader ready, themed by TEMPER. Framework-agnostic core plus a React binding. In progress toward the full WAI-ARIA pattern set.",
+  "keywords": ["accessibility", "aria", "keyboard", "focus-management", "components", "button", "dialog", "menu", "wcag"],
+  "license": "Apache-2.0",
+  "author": "Regis Lloyd Chapman",
+  "type": "module",
+  "sideEffects": ["./grasp.js", "*.css"],
+  "main": "grasp.js",
+  "exports": {
+    ".": "./grasp.js",
+    "./grasp.css": "./grasp.css",
+    "./react": {
+      "types": "./react/index.d.ts",
+      "default": "./react/index.js"
+    }
+  },
+  "files": ["grasp.js", "grasp.css", "react/", "README.md", "NOTICE"],
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": { "optional": true }
+  }
+}

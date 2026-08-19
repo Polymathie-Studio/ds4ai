@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GRASP demo</title>
+<link rel="stylesheet" href="./grasp.css" />
+<style>
+  body { margin: 0; padding: 2.5rem 1.5rem; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--color-bg-base, #f4f6f9); color: var(--color-text-primary, #1b1e22); }
+  .wrap { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
+  .case { border: 1px solid var(--color-border, #d4dae2); border-radius: var(--radius-md, 10px); background: var(--color-surface, #ffffff); padding: 1.25rem; }
+  .case > h2 { margin: 0 0 0.9rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.6; }
+  .row { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="case">
+    <h2>Buttons</h2>
+    <div class="row">
+      <button class="grasp-button grasp-button--primary">Primary</button>
+      <button class="grasp-button grasp-button--secondary">Secondary</button>
+      <button class="grasp-button grasp-button--ghost">Ghost</button>
+      <button class="grasp-button grasp-button--danger">Delete</button>
+      <button class="grasp-button grasp-button--primary" disabled>Disabled</button>
+    </div>
+  </div>
+
+  <div class="case">
+    <h2>Field</h2>
+    <grasp-field label="Email" hint="We only use it to sign you in." error="That email is not valid.">
+      <input type="email" value="not-an-email" required />
+    </grasp-field>
+  </div>
+
+  <div class="case">
+    <h2>Menu</h2>
+    <grasp-menu>
+      <button class="grasp-menu__trigger grasp-button grasp-button--secondary">Actions</button>
+      <div class="grasp-menu__list">
+        <button>Rename</button>
+        <button>Duplicate</button>
+        <button>Delete</button>
+      </div>
+    </grasp-menu>
+  </div>
+
+  <div class="case">
+    <h2>Modal</h2>
+    <button class="grasp-button grasp-button--primary" id="openModal">Open dialog</button>
+    <grasp-modal heading="Edit profile" id="modal">
+      <grasp-field label="Display name"><input type="text" value="Regis" /></grasp-field>
+      <div class="row" style="margin-top: 1.25rem; justify-content: flex-end;">
+        <button class="grasp-button grasp-button--secondary" onclick="document.getElementById('modal').close()">Cancel</button>
+        <button class="grasp-button grasp-button--primary" onclick="document.getElementById('modal').close()">Save</button>
+      </div>
+    </grasp-modal>
+  </div>
+</div>
+<script type="module" src="./grasp.js"></script>
+<script>
+  document.getElementById('openModal').addEventListener('click', () => document.getElementById('modal').open())
+</script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+/*
+ * GRASP - operable interaction components.
+ * A button, a wired form field, a modal with focus management, and a keyboard
+ * menu. Semantic, keyboard-operable, accessible by default, and themed by TEMPER
+ * with a fallback for every token. License: Apache-2.0.
+ */
+
+/* Button. Apply .grasp-button plus a variant to a real <button> or <a>. */
+.grasp-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2, 0.5rem);
+  padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm, 6px);
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: var(--font-weight-semibold, 600);
+  line-height: var(--leading-tight, 1.25);
+  cursor: pointer;
+  text-decoration: none;
+  background: var(--color-surface, #eef1f5);
+  color: var(--color-text-primary, #1b1e22);
+}
+.grasp-button:focus-visible {
+  outline: var(--ring-width, 3px) solid var(--color-focus-ring, #1e4e8c);
+  outline-offset: 2px;
+}
+.grasp-button[disabled],
+.grasp-button[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+.grasp-button[aria-busy="true"] { opacity: 0.7; cursor: progress; }
+.grasp-button--primary { background: var(--color-accent-solid, #1e4e8c); color: var(--color-text-on-accent, #ffffff); }
+.grasp-button--secondary { background: transparent; border-color: var(--color-border, #d4dae2); }
+.grasp-button--ghost { background: transparent; color: var(--color-accent, #1e4e8c); }
+.grasp-button--danger { background: var(--color-danger, #b3261e); color: var(--color-text-on-accent, #ffffff); }
+
+/* Field. The element wires the label, hint, error, and aria to the control. */
+.grasp-field { display: block; }
+.grasp-field__label {
+  display: block;
+  margin-bottom: var(--space-1, 0.25rem);
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: var(--font-weight-medium, 500);
+  color: var(--color-text-primary, #1b1e22);
+}
+.grasp-field__req { color: var(--color-danger, #b3261e); }
+.grasp-field__hint { margin: var(--space-1, 0.25rem) 0 0; font-size: var(--text-sm, 0.875rem); color: var(--color-text-secondary, #5a636e); }
+.grasp-field__error { margin: var(--space-1, 0.25rem) 0 0; font-size: var(--text-sm, 0.875rem); color: var(--color-danger, #b3261e); }
+.grasp-field input,
+.grasp-field select,
+.grasp-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  border: 1px solid var(--color-border, #d4dae2);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--color-bg-subtle, #ffffff);
+  color: var(--color-text-primary, #1b1e22);
+  font-size: var(--text-base, 1rem);
+}
+.grasp-field input:focus-visible,
+.grasp-field select:focus-visible,
+.grasp-field textarea:focus-visible {
+  outline: var(--ring-width, 3px) solid var(--color-focus-ring, #1e4e8c);
+  outline-offset: 1px;
+}
+.grasp-field [aria-invalid="true"] { border-color: var(--color-danger, #b3261e); }
+
+/* Modal. Built on the native <dialog> element, which gives focus trap, Escape,
+   and focus return for free (native-first). The custom element is an invisible
+   wrapper around the dialog. */
+grasp-modal { display: contents; }
+.grasp-modal {
+  box-sizing: border-box;
+  max-width: 32rem;
+  width: calc(100vw - 2rem);
+  max-height: calc(100vh - 2rem);
+  padding: var(--space-6, 1.5rem);
+  border: 1px solid var(--color-border, #d4dae2);
+  border-radius: var(--radius-md, 10px);
+  background: var(--color-surface, #ffffff);
+  color: var(--color-text-primary, #1b1e22);
+}
+.grasp-modal::backdrop { background: var(--color-overlay, rgba(20, 22, 26, 0.5)); }
+.grasp-modal__title { margin: 0 0 var(--space-3, 0.75rem); font-size: var(--text-xl, 1.25rem); font-weight: var(--font-weight-semibold, 600); }
+
+/* Menu. Trigger plus a list; keyboard navigation in JS. */
+.grasp-menu { position: relative; display: inline-block; }
+.grasp-menu__list {
+  position: absolute;
+  z-index: 600;
+  min-width: 12rem;
+  margin-top: var(--space-1, 0.25rem);
+  padding: var(--space-1, 0.25rem);
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-border, #d4dae2);
+  border-radius: var(--radius-sm, 6px);
+  display: none;
+}
+.grasp-menu[open] .grasp-menu__list { display: block; }
+.grasp-menu__item {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  border: none;
+  background: none;
+  border-radius: var(--radius-sm, 6px);
+  color: var(--color-text-primary, #1b1e22);
+  font-size: var(--text-sm, 0.875rem);
+  text-decoration: none;
+  cursor: pointer;
+}
+.grasp-menu__item:hover,
+.grasp-menu__item:focus-visible { background: var(--color-surface-hover, #eef1f5); outline: none; }
