@@ -25,6 +25,7 @@ GRASP builds on the semantic element wherever one exists and hand-rolls behavior
 - **Tabs**: `<grasp-tabs>` wires a tablist and panels with roving focus (arrow keys, Home, End), `aria-selected`, and `aria-controls`, showing one panel at a time.
 - **Tooltip**: `<grasp-tooltip text="...">` shows a bubble on hover and focus, dismisses on Escape, and wires `aria-describedby` so a screen reader reads it.
 - **Accordion**: `<grasp-accordion>` (add `single` for one open at a time) wires each header button's `aria-expanded` and `aria-controls` to its panel.
+- **Combobox**: `<grasp-combobox>` pairs an input with a filtered listbox, carrying `role="combobox"`, `aria-expanded`, and `aria-autocomplete`; it filters options as you type, navigates with the arrow keys through `aria-activedescendant` (the input keeps focus), selects on Enter, and closes on Escape.
 
 ## Quickstart
 

@@ -238,3 +238,41 @@ grasp-modal { display: contents; }
 .grasp-accordion__header::after { content: "+"; font-weight: 400; margin-left: var(--space-3, 0.75rem); }
 .grasp-accordion__header[aria-expanded="true"]::after { content: "\2212"; }
 .grasp-accordion__panel { padding: var(--space-3, 0.75rem) 0; color: var(--color-text-secondary, #5a636e); }
+
+/* Combobox. */
+.grasp-combobox { position: relative; display: block; }
+.grasp-combobox input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  border: 1px solid var(--color-border, #d4dae2);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--color-bg-subtle, #ffffff);
+  color: var(--color-text-primary, #1b1e22);
+  font-size: var(--text-base, 1rem);
+}
+.grasp-combobox input:focus-visible { outline: var(--ring-width, 3px) solid var(--color-focus-ring, #1e4e8c); outline-offset: 1px; }
+.grasp-combobox__list {
+  position: absolute;
+  z-index: 600;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: var(--space-1, 0.25rem);
+  max-height: 16rem;
+  overflow: auto;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-border, #d4dae2);
+  border-radius: var(--radius-sm, 6px);
+  padding: var(--space-1, 0.25rem);
+  display: none;
+}
+.grasp-combobox[open] .grasp-combobox__list { display: block; }
+.grasp-combobox__option {
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  border-radius: var(--radius-sm, 6px);
+  cursor: pointer;
+  color: var(--color-text-primary, #1b1e22);
+  font-size: var(--text-sm, 0.875rem);
+}
+.grasp-combobox__option:hover,
+.grasp-combobox__option[aria-selected="true"] { background: var(--color-surface-hover, #eef1f5); }

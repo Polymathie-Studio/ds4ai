@@ -283,6 +283,92 @@ class GraspAccordion extends HTMLElement {
   }
 }
 
+// --- Combobox: an input plus a filtered listbox, navigated by virtual focus ---
+class GraspCombobox extends HTMLElement {
+  connectedCallback() {
+    if (this._built) return;
+    this._built = true;
+    this.classList.add('grasp-combobox');
+    this._input = this.querySelector('input');
+    this._list = this.querySelector('.grasp-combobox__list') || this.querySelector('[role="listbox"]');
+    if (!this._input || !this._list) return;
+    if (!this._list.id) this._list.id = nextId('grasp-combobox-list');
+    this._input.setAttribute('role', 'combobox');
+    this._input.setAttribute('aria-expanded', 'false');
+    this._input.setAttribute('aria-controls', this._list.id);
+    this._input.setAttribute('aria-autocomplete', 'list');
+    this._input.setAttribute('autocomplete', 'off');
+    this._list.setAttribute('role', 'listbox');
+    this._options = Array.from(this._list.querySelectorAll('.grasp-combobox__option, [role="option"]'));
+    this._options.forEach((opt) => {
+      opt.setAttribute('role', 'option');
+      opt.classList.add('grasp-combobox__option');
+      if (!opt.id) opt.id = nextId('grasp-option');
+      opt.addEventListener('click', () => this._choose(opt));
+    });
+    this._active = -1;
+    this._input.addEventListener('input', () => { this._filter(); this.open(); });
+    this._input.addEventListener('keydown', (e) => this._onKey(e));
+    this._input.addEventListener('focus', () => { if (this._input.value) this.open(); });
+    this._onDoc = (e) => { if (!this.contains(e.target)) this.close(); };
+  }
+  _visible() { return this._options.filter((o) => !o.hidden); }
+  _filter() {
+    const q = this._input.value.trim().toLowerCase();
+    this._options.forEach((o) => { o.hidden = !!q && !o.textContent.toLowerCase().includes(q); });
+    this._setActive(-1);
+  }
+  open() {
+    if (this.hasAttribute('open') || !this._visible().length) return;
+    this.setAttribute('open', '');
+    this._input.setAttribute('aria-expanded', 'true');
+    document.addEventListener('click', this._onDoc, true);
+  }
+  close() {
+    if (!this.hasAttribute('open')) return;
+    this.removeAttribute('open');
+    this._input.setAttribute('aria-expanded', 'false');
+    this._setActive(-1);
+    document.removeEventListener('click', this._onDoc, true);
+  }
+  _setActive(i) {
+    const vis = this._visible();
+    this._options.forEach((o) => o.setAttribute('aria-selected', 'false'));
+    if (i >= 0 && i < vis.length) {
+      this._active = i;
+      this._activeEl = vis[i];
+      vis[i].setAttribute('aria-selected', 'true');
+      this._input.setAttribute('aria-activedescendant', vis[i].id);
+      vis[i].scrollIntoView({ block: 'nearest' });
+    } else {
+      this._active = -1;
+      this._activeEl = null;
+      this._input.removeAttribute('aria-activedescendant');
+    }
+  }
+  _move(delta) {
+    const vis = this._visible();
+    if (!vis.length) return;
+    this.open();
+    let i = this._active + delta;
+    if (i < 0) i = vis.length - 1;
+    if (i >= vis.length) i = 0;
+    this._setActive(i);
+  }
+  _choose(opt) {
+    this._input.value = opt.textContent.trim();
+    this.close();
+    this._input.focus();
+    this.dispatchEvent(new CustomEvent('grasp-select', { bubbles: true, detail: { value: opt.textContent.trim() } }));
+  }
+  _onKey(e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); this._move(1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); this._move(-1); }
+    else if (e.key === 'Enter') { if (this._activeEl) { e.preventDefault(); this._choose(this._activeEl); } }
+    else if (e.key === 'Escape') { e.preventDefault(); this.close(); }
+  }
+}
+
 if (typeof window !== 'undefined' && window.customElements) {
   const defs = {
     'grasp-field': GraspField,
@@ -291,10 +377,11 @@ if (typeof window !== 'undefined' && window.customElements) {
     'grasp-tabs': GraspTabs,
     'grasp-tooltip': GraspTooltip,
     'grasp-accordion': GraspAccordion,
+    'grasp-combobox': GraspCombobox,
   };
   for (const [tag, cls] of Object.entries(defs)) {
     if (!customElements.get(tag)) customElements.define(tag, cls);
   }
 }
 
-export { GraspField, GraspModal, GraspMenu, GraspTabs, GraspTooltip, GraspAccordion };
+export { GraspField, GraspModal, GraspMenu, GraspTabs, GraspTooltip, GraspAccordion, GraspCombobox };

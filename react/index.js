@@ -211,3 +211,60 @@ export function Accordion({ items = [], single = false }) {
     }),
   )
 }
+
+export function Combobox({ options = [], placeholder, onSelect, className = '' }) {
+  const [value, setValue] = useState('')
+  const [open, setOpen] = useState(false)
+  const [active, setActive] = useState(-1)
+  const rootRef = useRef(null)
+  const inputRef = useRef(null)
+  const base = useId()
+  const norm = options.map((o) => (typeof o === 'string' ? { label: o, value: o } : o))
+  const q = value.trim().toLowerCase()
+  const filtered = q ? norm.filter((o) => o.label.toLowerCase().includes(q)) : norm
+
+  useEffect(() => {
+    if (!open) return
+    const onDoc = (e) => { if (rootRef.current && !rootRef.current.contains(e.target)) setOpen(false) }
+    document.addEventListener('click', onDoc, true)
+    return () => document.removeEventListener('click', onDoc, true)
+  }, [open])
+
+  const choose = (o) => { setValue(o.label); setOpen(false); setActive(-1); if (onSelect) onSelect(o.value); if (inputRef.current) inputRef.current.focus() }
+  const onKey = (e) => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setOpen(true); setActive((a) => Math.min(a + 1, filtered.length - 1)) }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setActive((a) => Math.max(a - 1, 0)) }
+    else if (e.key === 'Enter') { if (open && active >= 0 && filtered[active]) { e.preventDefault(); choose(filtered[active]) } }
+    else if (e.key === 'Escape') { setOpen(false); setActive(-1) }
+  }
+  const isOpen = open && filtered.length > 0
+  const activeId = isOpen && active >= 0 && filtered[active] ? base + '-o' + active : undefined
+
+  return h('div', { className: ('grasp-combobox ' + className).trim(), ref: rootRef, ...(isOpen ? { open: '' } : {}) },
+    h('input', {
+      ref: inputRef,
+      type: 'text',
+      placeholder,
+      value,
+      role: 'combobox',
+      'aria-expanded': isOpen,
+      'aria-controls': base + '-list',
+      'aria-autocomplete': 'list',
+      'aria-activedescendant': activeId,
+      autoComplete: 'off',
+      onChange: (e) => { setValue(e.target.value); setOpen(true); setActive(-1) },
+      onKeyDown: onKey,
+      onFocus: () => { if (value) setOpen(true) },
+    }),
+    h('div', { className: 'grasp-combobox__list', role: 'listbox', id: base + '-list' },
+      filtered.map((o, i) => h('div', {
+        key: i,
+        id: base + '-o' + i,
+        role: 'option',
+        className: 'grasp-combobox__option',
+        'aria-selected': i === active,
+        onClick: () => choose(o),
+      }, o.label)),
+    ),
+  )
+}

@@ -57,3 +57,12 @@ export function Tooltip(props: TooltipProps): JSX.Element
 export interface AccordionItem { header: ReactNode; content: ReactNode }
 export interface AccordionProps { items: AccordionItem[]; single?: boolean }
 export function Accordion(props: AccordionProps): JSX.Element
+
+export type ComboboxOption = string | { label: string; value: string }
+export interface ComboboxProps {
+  options: ComboboxOption[]
+  placeholder?: string
+  onSelect?: (value: string) => void
+  className?: string
+}
+export function Combobox(props: ComboboxProps): JSX.Element
