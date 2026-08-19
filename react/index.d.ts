@@ -1,10 +1,22 @@
-import type { ReactNode, ReactElement, ButtonHTMLAttributes } from 'react'
+import type { ReactNode, ReactElement, ButtonHTMLAttributes, InputHTMLAttributes, SelectHTMLAttributes } from 'react'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'danger'
   className?: string
 }
 export function Button(props: ButtonProps): JSX.Element
+
+export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
+  className?: string
+}
+export function Checkbox(props: CheckboxProps): JSX.Element
+export function Radio(props: CheckboxProps): JSX.Element
+export function Switch(props: CheckboxProps): JSX.Element
+
+export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+  className?: string
+}
+export function Select(props: SelectProps): JSX.Element
 
 export interface FieldProps {
   label?: string

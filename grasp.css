@@ -66,6 +66,76 @@
 }
 .grasp-field [aria-invalid="true"] { border-color: var(--color-danger, #b3261e); }
 
+/* Form controls. Native inputs, themed and given a visible focus ring; native
+   keeps the keyboard and screen-reader behavior for free. */
+.grasp-checkbox,
+.grasp-radio {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--color-accent-solid, #1e4e8c);
+  cursor: pointer;
+}
+.grasp-checkbox:focus-visible,
+.grasp-radio:focus-visible,
+.grasp-switch:focus-visible,
+.grasp-select:focus-visible {
+  outline: var(--ring-width, 3px) solid var(--color-focus-ring, #1e4e8c);
+  outline-offset: 2px;
+}
+/* A control paired with its label on one row. */
+.grasp-choice {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2, 0.5rem);
+  font-size: var(--text-base, 1rem);
+  color: var(--color-text-primary, #1b1e22);
+  cursor: pointer;
+}
+
+/* Switch: a checkbox presented as a toggle. Put role="switch" on the input. */
+.grasp-switch {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: none;
+  width: 2.25rem;
+  height: 1.3rem;
+  border-radius: 999px;
+  background: var(--color-border, #d4dae2);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.grasp-switch:checked { background: var(--color-accent-solid, #1e4e8c); }
+.grasp-switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(1.3rem - 4px);
+  height: calc(1.3rem - 4px);
+  border-radius: 999px;
+  background: #ffffff;
+  transition: transform 0.15s;
+}
+.grasp-switch:checked::after { transform: translateX(0.95rem); }
+@media (prefers-reduced-motion: reduce) {
+  .grasp-switch,
+  .grasp-switch::after { transition: none; }
+}
+
+/* Select: the native select, themed. */
+.grasp-select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  border: 1px solid var(--color-border, #d4dae2);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--color-bg-subtle, #ffffff);
+  color: var(--color-text-primary, #1b1e22);
+  font-size: var(--text-base, 1rem);
+  cursor: pointer;
+}
+
 /* Modal. Built on the native <dialog> element, which gives focus trap, Escape,
    and focus return for free (native-first). The custom element is an invisible
    wrapper around the dialog. */

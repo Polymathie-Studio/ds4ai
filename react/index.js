@@ -11,6 +11,22 @@ export function Button({ variant, className = '', ...rest }) {
   return h('button', { className: cls, ...rest })
 }
 
+export function Checkbox({ className = '', ...rest }) {
+  return h('input', { type: 'checkbox', className: ('grasp-checkbox ' + className).trim(), ...rest })
+}
+
+export function Radio({ className = '', ...rest }) {
+  return h('input', { type: 'radio', className: ('grasp-radio ' + className).trim(), ...rest })
+}
+
+export function Switch({ className = '', ...rest }) {
+  return h('input', { type: 'checkbox', role: 'switch', className: ('grasp-switch ' + className).trim(), ...rest })
+}
+
+export function Select({ className = '', children, ...rest }) {
+  return h('select', { className: ('grasp-select ' + className).trim(), ...rest }, children)
+}
+
 export function Field({ label, hint, error, children }) {
   const rid = useId()
   const control = Children.only(children)

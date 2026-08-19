@@ -34,6 +34,18 @@
   </div>
 
   <div class="case">
+    <h2>Form controls</h2>
+    <div class="row" style="gap: 1.25rem;">
+      <label class="grasp-choice"><input type="checkbox" class="grasp-checkbox" checked /> Notify me</label>
+      <label class="grasp-choice"><input type="radio" name="plan" class="grasp-radio" checked /> Weekly</label>
+      <label class="grasp-choice"><input type="checkbox" role="switch" class="grasp-switch" checked /> Dark mode</label>
+    </div>
+    <div style="margin-top: 1rem;">
+      <grasp-field label="Plan"><select class="grasp-select"><option>Free</option><option>Pro</option></select></grasp-field>
+    </div>
+  </div>
+
+  <div class="case">
     <h2>Menu</h2>
     <grasp-menu>
       <button class="grasp-menu__trigger grasp-button grasp-button--secondary">Actions</button>
