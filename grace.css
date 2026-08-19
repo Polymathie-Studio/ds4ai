@@ -1,0 +1,69 @@
+/*
+ * GRACE - state components for the off-happy-path.
+ * Renders LUCID's principle: the pending, absent, failed, and unreachable
+ * states of a surface. Written against TEMPER's semantic tokens with a fallback
+ * for each, so it themes where TEMPER is present and stays clean where it is not.
+ * License: Apache-2.0.
+ */
+
+/* Skeleton (pending). A content-shaped placeholder; size it like what will
+   arrive so the layout does not jump. Pure CSS: apply the class to boxes. */
+.grace-skeleton {
+  display: block;
+  min-height: 1em;
+  background: var(--color-bg-subtle, #e9edf2);
+  border-radius: var(--radius-sm, 6px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .grace-skeleton {
+    animation: grace-pulse 1.6s ease-in-out infinite;
+  }
+}
+@keyframes grace-pulse {
+  50% { opacity: 0.55; }
+}
+
+/* Empty, error, and not-found share one centered layout. */
+.grace-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3, 0.75rem);
+  padding: var(--space-8, 2rem);
+  color: var(--color-text-primary, #1b1e22);
+}
+.grace-state__title {
+  margin: 0;
+  font-size: var(--text-lg, 1.125rem);
+  font-weight: var(--font-weight-semibold, 600);
+  line-height: var(--leading-tight, 1.25);
+}
+.grace-state__message {
+  margin: 0;
+  max-width: 42ch;
+  font-size: var(--text-base, 1rem);
+  line-height: var(--leading-normal, 1.5);
+  color: var(--color-text-secondary, #5a636e);
+}
+.grace-state__action {
+  margin-top: var(--space-2, 0.5rem);
+  display: inline-block;
+  padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
+  border: none;
+  border-radius: var(--radius-sm, 6px);
+  background: var(--color-accent-solid, #1e4e8c);
+  color: var(--color-text-on-accent, #ffffff);
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: var(--font-weight-semibold, 600);
+  text-decoration: none;
+  cursor: pointer;
+}
+.grace-state__action:focus-visible {
+  outline: var(--ring-width, 3px) solid var(--color-focus-ring, #1e4e8c);
+  outline-offset: 2px;
+}
+/* The error state accents its title with the danger role. */
+.grace-state--error .grace-state__title {
+  color: var(--color-danger, #b3261e);
+}
