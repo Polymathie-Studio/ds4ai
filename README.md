@@ -60,6 +60,10 @@ function AssistButton() {
 
 The key is held only in the browser. HASP never sends it anywhere. Your app decides how the key reaches the model: either the browser calls the provider directly (the key never touches any server), or the browser sends the key with a request to your own route which forwards it and does not store or log it. HASP takes no position beyond keeping the key local; it is your app's job to honor the promise on the wire.
 
+## Part of the Polymathie family
+
+HASP is one of the [Polymathie](https://github.com/Polymathie-Studio) primitives: small, dependency-free pieces for building websites, dashboards, and tools, where each protects one posture that fast, AI-assisted building tends to drop. Its siblings are [TEMPER](https://github.com/Polymathie-Studio/temper) (legibility and design tokens) and [LUCID](https://github.com/Polymathie-Studio/lucid) (honest disclosure), with more of the invisible-correctness layer in progress. Adopt one and the others compose with it.
+
 ## License
 
 Apache-2.0. Copyright 2026 Regis Lloyd Chapman. See `LICENSE` and `NOTICE`.
