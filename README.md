@@ -71,9 +71,18 @@ The error state uses an assertive live region so a screen reader announces it; e
 
 GRACE reads TEMPER's semantic tokens (surface, border, text, accent, danger, plus the spacing and type scales) with a fallback for each. Set a TEMPER mode on the root and GRACE follows it; where TEMPER is absent, the fallbacks render a clean neutral state.
 
-## Part of the Polymathie family
+## Part of DS4AI, the Design Suite for AI
 
-GRACE is one of the [Polymathie](https://github.com/Polymathie-Studio) primitives: small, dependency-free pieces for building websites, dashboards, and tools, where each protects one posture that fast, AI-assisted building tends to drop. Its siblings are [TEMPER](https://github.com/Polymathie-Studio/temper) (legibility and design tokens), [LUCID](https://github.com/Polymathie-Studio/lucid) (honest disclosure), and [HASP](https://github.com/Polymathie-Studio/hasp) (bring-your-own-key privacy), with more of the invisible-correctness layer in progress. Adopt one and the others compose with it.
+GRACE is one instrument in **DS4AI, the Design Suite for AI, from [Polymathie-Studio](https://github.com/Polymathie-Studio)**: small, dependency-free pieces that each close one axis of the *invisible-correctness layer*, the part of a shipped surface a look-at-it review cannot see and that fast, AI-assisted building drops.
+
+- **[TEMPER](https://github.com/Polymathie-Studio/temper)**: perceivable, color and design tokens
+- **[GRASP](https://github.com/Polymathie-Studio/grasp)**: operable, interaction components
+- **[LUCID](https://github.com/Polymathie-Studio/lucid)** + **[GRACE](https://github.com/Polymathie-Studio/grace)**: honest off the happy path, disclosure and state components
+- **[HASP](https://github.com/Polymathie-Studio/hasp)**: key privacy, bring-your-own-key
+- **[BEACON](https://github.com/Polymathie-Studio/beacon)**: findable, head metadata and site files
+- **[FLEET](https://github.com/Polymathie-Studio/fleet)**: fast and stable, delivery
+
+**[MISSING](https://github.com/Polymathie-Studio/missing)** is the standard at the center of DS4AI: it names the axes, routes each to its instrument, and ships a machine-readable manifest and a conformance auditor. Adopt one and the others compose with it.
 
 ## License
 
