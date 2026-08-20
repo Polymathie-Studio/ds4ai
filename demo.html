@@ -99,6 +99,77 @@
   </div>
 
   <div class="case">
+    <h2>Slider</h2>
+    <input type="range" class="grasp-slider" min="0" max="100" value="60" aria-label="Volume" />
+  </div>
+
+  <div class="case">
+    <h2>Spinbutton</h2>
+    <grasp-field label="Quantity"><input type="number" class="grasp-spinbutton" value="3" min="0" max="10" /></grasp-field>
+  </div>
+
+  <div class="case">
+    <h2>Progress and meter</h2>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <progress class="grasp-progress" value="0.6" max="1" aria-label="Upload"></progress>
+      <meter class="grasp-meter" value="0.8" min="0" max="1" aria-label="Disk used"></meter>
+    </div>
+  </div>
+
+  <div class="case">
+    <h2>Breadcrumb</h2>
+    <nav class="grasp-breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Library</a></li>
+        <li><span aria-current="page">Data</span></li>
+      </ol>
+    </nav>
+  </div>
+
+  <div class="case">
+    <h2>Toggle group</h2>
+    <div class="grasp-toggle-group" role="group" aria-label="View">
+      <label class="grasp-toggle-group__option">
+        <input type="radio" name="view" value="list" class="grasp-toggle-group__input" checked />
+        <span class="grasp-toggle-group__label">List</span>
+      </label>
+      <label class="grasp-toggle-group__option">
+        <input type="radio" name="view" value="grid" class="grasp-toggle-group__input" />
+        <span class="grasp-toggle-group__label">Grid</span>
+      </label>
+      <label class="grasp-toggle-group__option">
+        <input type="radio" name="view" value="board" class="grasp-toggle-group__input" />
+        <span class="grasp-toggle-group__label">Board</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="case">
+    <h2>Toolbar</h2>
+    <grasp-toolbar aria-label="Formatting">
+      <button class="grasp-button grasp-button--secondary">Bold</button>
+      <button class="grasp-button grasp-button--secondary">Italic</button>
+      <button class="grasp-button grasp-button--secondary">Underline</button>
+    </grasp-toolbar>
+  </div>
+
+  <div class="case">
+    <h2>Popover</h2>
+    <grasp-popover>
+      <button class="grasp-popover__trigger grasp-button grasp-button--secondary">Details</button>
+      <div class="grasp-popover__panel">
+        <p style="margin: 0;">A short explanation shown in a popover, dismissed by clicking away or pressing Escape.</p>
+      </div>
+    </grasp-popover>
+  </div>
+
+  <div class="case">
+    <h2>Toast</h2>
+    <button class="grasp-button grasp-button--primary" id="toastBtn">Show toast</button>
+  </div>
+
+  <div class="case">
     <h2>Modal</h2>
     <button class="grasp-button grasp-button--primary" id="openModal">Open dialog</button>
     <grasp-modal heading="Edit profile" id="modal">
@@ -111,6 +182,10 @@
   </div>
 </div>
 <script type="module" src="./grasp.js"></script>
+<script type="module">
+  import { toast } from './grasp.js'
+  document.getElementById('toastBtn').addEventListener('click', () => toast('Saved your changes.', { variant: 'success' }))
+</script>
 <script>
   document.getElementById('openModal').addEventListener('click', () => document.getElementById('modal').open())
 </script>

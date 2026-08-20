@@ -6,6 +6,9 @@
 
 import { createElement as h, useId, useRef, useEffect, useState, cloneElement, Children } from 'react'
 
+// Tier 3 native/CSS controls live at the end of this file: Slider, Spinbutton,
+// Progress, Meter, Breadcrumb, ToggleGroup. Each builds on a native element.
+
 export function Button({ variant, className = '', ...rest }) {
   const cls = ['grasp-button', variant ? 'grasp-button--' + variant : '', className].filter(Boolean).join(' ')
   return h('button', { className: cls, ...rest })
@@ -266,5 +269,164 @@ export function Combobox({ options = [], placeholder, onSelect, className = '' }
         onClick: () => choose(o),
       }, o.label)),
     ),
+  )
+}
+
+// --- Tier 3: native/CSS controls. Each is a themed native element. ---
+
+export function Slider({ className = '', ...rest }) {
+  return h('input', { type: 'range', className: ('grasp-slider ' + className).trim(), ...rest })
+}
+
+export function Spinbutton({ className = '', ...rest }) {
+  return h('input', { type: 'number', className: ('grasp-spinbutton ' + className).trim(), ...rest })
+}
+
+export function Progress({ className = '', ...rest }) {
+  return h('progress', { className: ('grasp-progress ' + className).trim(), ...rest })
+}
+
+export function Meter({ className = '', ...rest }) {
+  return h('meter', { className: ('grasp-meter ' + className).trim(), ...rest })
+}
+
+export function Breadcrumb({ items = [], label = 'Breadcrumb', className = '' }) {
+  return h('nav', { className: ('grasp-breadcrumb ' + className).trim(), 'aria-label': label },
+    h('ol', null,
+      items.map((it, i) => {
+        const last = i === items.length - 1
+        return h('li', { key: i },
+          !last && it.href
+            ? h('a', { href: it.href }, it.label)
+            : h('span', { 'aria-current': last ? 'page' : undefined }, it.label)
+        )
+      }),
+    ),
+  )
+}
+
+export function ToggleGroup({ options = [], name, value, defaultValue, multiple = false, onChange, label, className = '' }) {
+  const rid = useId()
+  const groupName = name || rid
+  const isOn = (v, ov) => (multiple ? Array.isArray(v) && v.includes(ov) : v === ov)
+  const controlled = value !== undefined
+  return h('div', { className: ('grasp-toggle-group ' + className).trim(), role: 'group', 'aria-label': label },
+    options.map((o, i) => {
+      const opt = typeof o === 'string' ? { label: o, value: o } : o
+      const input = {
+        className: 'grasp-toggle-group__input',
+        type: multiple ? 'checkbox' : 'radio',
+        value: opt.value,
+        onChange,
+      }
+      if (!multiple) input.name = groupName
+      if (controlled) input.checked = isOn(value, opt.value)
+      else input.defaultChecked = isOn(defaultValue, opt.value)
+      return h('label', { key: i, className: 'grasp-toggle-group__option' },
+        h('input', input),
+        h('span', { className: 'grasp-toggle-group__label' }, opt.label),
+      )
+    }),
+  )
+}
+
+// --- Tier 3 widgets: Toolbar, Toast, Popover ---
+
+const TOOLBAR_ITEMS = 'button, a[href], [role="button"]'
+
+export function Toolbar({ children, orientation, label, className = '' }) {
+  const ref = useRef(null)
+  const vertical = orientation === 'vertical'
+  useEffect(() => {
+    const items = ref.current ? Array.from(ref.current.querySelectorAll(TOOLBAR_ITEMS)) : []
+    items.forEach((it, i) => { it.tabIndex = i === 0 ? 0 : -1 })
+  }, [])
+  const onKeyDown = (e) => {
+    const items = ref.current ? Array.from(ref.current.querySelectorAll(TOOLBAR_ITEMS)) : []
+    if (!items.length) return
+    const cur = items.indexOf(document.activeElement)
+    const next = vertical ? 'ArrowDown' : 'ArrowRight'
+    const prev = vertical ? 'ArrowUp' : 'ArrowLeft'
+    let to = null
+    if (e.key === next) to = (cur + 1) % items.length
+    else if (e.key === prev) to = (cur - 1 + items.length) % items.length
+    else if (e.key === 'Home') to = 0
+    else if (e.key === 'End') to = items.length - 1
+    if (to !== null) {
+      e.preventDefault()
+      items.forEach((it, i) => { it.tabIndex = i === to ? 0 : -1 })
+      items[to].focus()
+    }
+  }
+  return h('div', {
+    ref,
+    className: ('grasp-toolbar ' + className).trim(),
+    role: 'toolbar',
+    'aria-label': label,
+    'aria-orientation': vertical ? 'vertical' : undefined,
+    onKeyDown,
+  }, children)
+}
+
+// Controlled: the app owns the toasts array and dismissal (timing included).
+export function Toast({ toasts = [], onDismiss, assertive = false, label = 'Notifications', className = '' }) {
+  return h('div', {
+    className: ('grasp-toast-region ' + className).trim(),
+    role: 'region',
+    'aria-label': label,
+    'aria-live': assertive ? 'assertive' : 'polite',
+    'aria-atomic': 'false',
+  },
+    toasts.map((t) => {
+      const item = typeof t === 'string' ? { id: t, message: t } : t
+      return h('div', {
+        key: item.id,
+        className: 'grasp-toast' + (item.variant ? ' grasp-toast--' + item.variant : ''),
+        role: item.assertive ? 'alert' : 'status',
+      },
+        h('span', { className: 'grasp-toast__text', key: 't' }, item.message),
+        onDismiss ? h('button', {
+          key: 'x',
+          type: 'button',
+          className: 'grasp-toast__close',
+          'aria-label': 'Dismiss',
+          onClick: () => onDismiss(item.id),
+        }, '×') : null,
+      )
+    }),
+  )
+}
+
+export function Popover({ trigger, triggerVariant = 'secondary', children, className = '' }) {
+  const id = useId()
+  const panelRef = useRef(null)
+  const triggerRef = useRef(null)
+  const [open, setOpen] = useState(false)
+  useEffect(() => {
+    const panel = panelRef.current
+    if (!panel) return
+    const onToggle = (e) => {
+      const isOpen = e.newState === 'open'
+      setOpen(isOpen)
+      if (isOpen && triggerRef.current) {
+        const r = triggerRef.current.getBoundingClientRect()
+        panel.style.position = 'fixed'
+        panel.style.margin = '0'
+        panel.style.top = (r.bottom + 6) + 'px'
+        panel.style.left = r.left + 'px'
+      }
+    }
+    panel.addEventListener('toggle', onToggle)
+    return () => panel.removeEventListener('toggle', onToggle)
+  }, [])
+  return h('span', { className: ('grasp-popover ' + className).trim() },
+    h('button', {
+      ref: triggerRef,
+      type: 'button',
+      className: 'grasp-popover__trigger grasp-button grasp-button--' + triggerVariant,
+      popoverTarget: id,
+      'aria-expanded': open,
+    }, trigger),
+    h('div', { ref: panelRef, id, popover: '', className: 'grasp-popover__panel' }, children),
   )
 }

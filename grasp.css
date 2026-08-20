@@ -276,3 +276,164 @@ grasp-modal { display: contents; }
 }
 .grasp-combobox__option:hover,
 .grasp-combobox__option[aria-selected="true"] { background: var(--color-surface-hover, #eef1f5); }
+
+/* Slider: the native range input, themed. Native keeps the keyboard behavior. */
+.grasp-slider {
+  width: 100%;
+  accent-color: var(--color-accent-solid, #1e4e8c);
+  cursor: pointer;
+}
+.grasp-slider:focus-visible { outline: var(--ring-width, 3px) solid var(--color-focus-ring, #1e4e8c); outline-offset: 4px; }
+
+/* Spinbutton: the native number input, themed like a field control. */
+.grasp-spinbutton {
+  box-sizing: border-box;
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  border: 1px solid var(--color-border, #d4dae2);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--color-bg-subtle, #ffffff);
+  color: var(--color-text-primary, #1b1e22);
+  font-size: var(--text-base, 1rem);
+}
+.grasp-spinbutton:focus-visible { outline: var(--ring-width, 3px) solid var(--color-focus-ring, #1e4e8c); outline-offset: 1px; }
+
+/* Progress and Meter: the native elements, themed. role=progressbar / meter and
+   the indeterminate state come from the platform. */
+.grasp-progress,
+.grasp-meter {
+  width: 100%;
+  height: var(--space-2, 0.5rem);
+  border: none;
+  border-radius: 999px;
+  background: var(--color-surface-hover, #eef1f5);
+  accent-color: var(--color-accent-solid, #1e4e8c);
+  overflow: hidden;
+}
+.grasp-progress::-webkit-progress-bar { background: var(--color-surface-hover, #eef1f5); border-radius: 999px; }
+.grasp-progress::-webkit-progress-value { background: var(--color-accent-solid, #1e4e8c); border-radius: 999px; }
+.grasp-progress::-moz-progress-bar { background: var(--color-accent-solid, #1e4e8c); }
+.grasp-meter::-webkit-meter-bar { background: var(--color-surface-hover, #eef1f5); border: none; border-radius: 999px; }
+.grasp-meter::-webkit-meter-optimum-value { background: var(--color-accent-solid, #1e4e8c); border-radius: 999px; }
+.grasp-meter:-moz-meter-optimum::-moz-meter-bar { background: var(--color-accent-solid, #1e4e8c); }
+
+/* Breadcrumb: a semantic <nav> plus <ol>, with a separator between items and the
+   current page marked. No script; the semantics carry it. */
+.grasp-breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2, 0.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-sm, 0.875rem);
+}
+.grasp-breadcrumb li { display: flex; align-items: center; gap: var(--space-2, 0.5rem); }
+.grasp-breadcrumb li + li::before { content: "/"; color: var(--color-text-secondary, #5a636e); }
+.grasp-breadcrumb a { color: var(--color-accent, #1e4e8c); text-decoration: none; }
+.grasp-breadcrumb a:hover { text-decoration: underline; }
+.grasp-breadcrumb a:focus-visible { outline: var(--ring-width, 3px) solid var(--color-focus-ring, #1e4e8c); outline-offset: 2px; border-radius: var(--radius-sm, 6px); }
+.grasp-breadcrumb [aria-current="page"] { color: var(--color-text-secondary, #5a636e); }
+
+/* Toggle group: native radios (single) or checkboxes (multi) styled as a
+   segmented control. The input is visually hidden but operable, so the keyboard
+   and screen-reader behavior come from the platform. */
+.grasp-toggle-group {
+  display: inline-flex;
+  border: 1px solid var(--color-border, #d4dae2);
+  border-radius: var(--radius-sm, 6px);
+  overflow: hidden;
+}
+.grasp-toggle-group__option { position: relative; display: inline-flex; }
+.grasp-toggle-group__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.grasp-toggle-group__label {
+  padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: var(--font-weight-medium, 500);
+  color: var(--color-text-primary, #1b1e22);
+  background: var(--color-bg-subtle, #ffffff);
+  border-left: 1px solid var(--color-border, #d4dae2);
+  cursor: pointer;
+}
+.grasp-toggle-group__option:first-child .grasp-toggle-group__label { border-left: none; }
+.grasp-toggle-group__input:checked + .grasp-toggle-group__label { background: var(--color-accent-solid, #1e4e8c); color: var(--color-text-on-accent, #ffffff); }
+.grasp-toggle-group__input:focus-visible + .grasp-toggle-group__label { outline: var(--ring-width, 3px) solid var(--color-focus-ring, #1e4e8c); outline-offset: -2px; }
+
+/* Toolbar: a themed group of controls. The one tab stop and roving arrow-key
+   focus are managed in JS. */
+.grasp-toolbar {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1, 0.25rem);
+  padding: var(--space-1, 0.25rem);
+  border: 1px solid var(--color-border, #d4dae2);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--color-surface, #ffffff);
+}
+.grasp-toolbar[aria-orientation="vertical"] { flex-direction: column; align-items: stretch; }
+
+/* Toast: a fixed live region; each toast is a status or alert card that the
+   region's push API appends. */
+.grasp-toast-region {
+  position: fixed;
+  z-index: 900;
+  bottom: var(--space-4, 1rem);
+  right: var(--space-4, 1rem);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 0.5rem);
+  max-width: min(24rem, calc(100vw - 2rem));
+}
+.grasp-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3, 0.75rem);
+  padding: var(--space-3, 0.75rem) var(--space-4, 1rem);
+  border: 1px solid var(--color-border, #d4dae2);
+  border-radius: var(--radius-md, 10px);
+  background: var(--color-surface, #ffffff);
+  color: var(--color-text-primary, #1b1e22);
+  box-shadow: 0 4px 12px var(--color-overlay, rgba(20, 22, 26, 0.15));
+  animation: grasp-toast-in 0.18s ease-out;
+}
+.grasp-toast--success { border-left: 3px solid var(--color-accent-solid, #1e4e8c); }
+.grasp-toast--danger { border-left: 3px solid var(--color-danger, #b3261e); }
+.grasp-toast__text { flex: 1; font-size: var(--text-sm, 0.875rem); }
+.grasp-toast__close {
+  flex: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--color-text-secondary, #5a636e);
+  font-size: var(--text-base, 1rem);
+  line-height: 1;
+  padding: 0;
+}
+.grasp-toast__close:focus-visible { outline: var(--ring-width, 3px) solid var(--color-focus-ring, #1e4e8c); outline-offset: 2px; }
+@keyframes grasp-toast-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .grasp-toast { animation: none; } }
+
+/* Popover: the native Popover API panel, themed. Placement is set in JS since
+   the panel lives in the top layer. */
+.grasp-popover { display: inline-block; }
+.grasp-popover__panel {
+  box-sizing: border-box;
+  max-width: min(20rem, calc(100vw - 2rem));
+  padding: var(--space-4, 1rem);
+  border: 1px solid var(--color-border, #d4dae2);
+  border-radius: var(--radius-md, 10px);
+  background: var(--color-surface, #ffffff);
+  color: var(--color-text-primary, #1b1e22);
+  box-shadow: 0 4px 12px var(--color-overlay, rgba(20, 22, 26, 0.15));
+}

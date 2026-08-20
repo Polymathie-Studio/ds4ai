@@ -7,7 +7,7 @@
 
 GRASP is operable interaction components: the controls AI builds get wrong. A div is not a button, a modal that opens but never traps focus locks out a keyboard, a field with no wired label is silent to a screen reader, and a dropdown built from divs cannot be reached with the Tab key. GRASP gives you those controls built right, semantic, keyboard-operable, and screen-reader ready by default, themed by TEMPER.
 
-It is **in progress** toward the full set of interaction patterns that need accessibility (the WAI-ARIA Authoring Practices patterns; see the scope note). This is tranche one: **Button, Field, Modal, and Menu**, the four the evidence shows AI breaks most. Tabs, tooltip, accordion, combobox, and the rest follow.
+It covers the common working set of interaction patterns that need accessibility (the WAI-ARIA Authoring Practices patterns; see the scope note): all of Tiers 1 to 3, which is Button, Field, Modal, Menu, Checkbox, Radio, Switch, Select, Tabs, Tooltip, Accordion, Combobox, Slider, Spinbutton, Progress and Meter, Breadcrumb, Toggle group, Toolbar, Toast, and Popover. Tier 4 is the acknowledged extension tail (date picker, table and grid, tree, and the rest), added as needed and marked not-yet-covered rather than pretended. GRASP stays **0.x** until a numbered release is cut.
 
 No build step is required. The framework-agnostic core is one small ES module and one CSS file, with a React binding alongside. The package name is `grasp-ui`; it is planned for npm but not yet published.
 
@@ -26,6 +26,14 @@ GRASP builds on the semantic element wherever one exists and hand-rolls behavior
 - **Tooltip**: `<grasp-tooltip text="...">` shows a bubble on hover and focus, dismisses on Escape, and wires `aria-describedby` so a screen reader reads it.
 - **Accordion**: `<grasp-accordion>` (add `single` for one open at a time) wires each header button's `aria-expanded` and `aria-controls` to its panel.
 - **Combobox**: `<grasp-combobox>` pairs an input with a filtered listbox, carrying `role="combobox"`, `aria-expanded`, and `aria-autocomplete`; it filters options as you type, navigates with the arrow keys through `aria-activedescendant` (the input keeps focus), selects on Enter, and closes on Escape.
+- **Slider**: `.grasp-slider` on a native `<input type="range">`, themed with a visible focus ring; the keyboard behavior and `role="slider"` come from the platform.
+- **Spinbutton**: `.grasp-spinbutton` on a native `<input type="number">`, themed like a field control, with the native stepper and `role="spinbutton"`. Wrap it in `<grasp-field>` for the label and error wiring.
+- **Progress and Meter**: `.grasp-progress` on a native `<progress>` (a determinate or, with no `value`, indeterminate progressbar) and `.grasp-meter` on a native `<meter>` (a static gauge), each carrying its native role.
+- **Breadcrumb**: `.grasp-breadcrumb` on a `<nav aria-label="Breadcrumb">` wrapping an `<ol>`, with the current page marked `aria-current="page"`. Semantics only, no script.
+- **Toggle group**: `.grasp-toggle-group` wraps native radios (single-select) or checkboxes (multi-select) styled as a segmented control. The input is visually hidden but operable, so the keyboard and screen-reader behavior come from the platform; put `role="group"` and an `aria-label` on the wrapper.
+- **Toolbar**: `<grasp-toolbar>` carries `role="toolbar"`, gives the group a single tab stop, and moves focus between its buttons with the arrow keys, Home, and End (add `orientation="vertical"` for up and down).
+- **Toast**: `<grasp-toast-region>` is a live region with a `show(message, opts)` method; the exported `toast(message, opts)` helper pushes onto a default region, creating it on first use. Each toast is `role="status"` (polite) or, with `assertive`, `role="alert"`, carries a dismiss button, and auto-dismisses after a duration; the entrance animation respects `prefers-reduced-motion`.
+- **Popover**: `<grasp-popover>` builds on the native Popover API, so show, hide, light-dismiss, Escape, and the top layer come from the platform; GRASP wires `popovertarget`, reflects `aria-expanded`, and positions the panel by the trigger.
 
 ## Quickstart
 

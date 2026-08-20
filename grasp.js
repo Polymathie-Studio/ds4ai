@@ -1,13 +1,12 @@
 /*
  * GRASP - the framework-agnostic core. Zero dependencies.
  *
- * Native-first: builds on <button>, native form controls, and the <dialog>
- * element, and hand-rolls behavior only where no native element covers the
- * pattern. Registers three custom elements:
- *   <grasp-field>  wires a label, hint, error, and aria to a native control.
- *   <grasp-modal>  wraps a native <dialog> (focus trap, Escape, focus return).
- *   <grasp-menu>   a keyboard-navigable menu (trigger plus a list of items).
- * The button is CSS: apply .grasp-button (and a variant) to a real <button>.
+ * Native-first: builds on <button>, native form controls, the <dialog>
+ * element, and the native Popover API, and hand-rolls behavior only where no
+ * native element covers the pattern. It registers the custom elements that need
+ * script (field, modal, menu, tabs, tooltip, accordion, combobox, toolbar,
+ * toast region, popover); the button, form controls, slider, spinbutton,
+ * progress, meter, breadcrumb, and toggle group are CSS over native markup.
  *
  * License: Apache-2.0.
  */
@@ -369,6 +368,121 @@ class GraspCombobox extends HTMLElement {
   }
 }
 
+// --- Toolbar: a group of controls with one tab stop and roving arrow-key focus ---
+class GraspToolbar extends HTMLElement {
+  connectedCallback() {
+    if (this._built) return;
+    this._built = true;
+    this.classList.add('grasp-toolbar');
+    this.setAttribute('role', 'toolbar');
+    this._vertical = this.getAttribute('orientation') === 'vertical';
+    if (this._vertical) this.setAttribute('aria-orientation', 'vertical');
+    this._items = Array.from(this.querySelectorAll('button, a[href], [role="button"]'));
+    if (!this._items.length) return;
+    this._index = 0;
+    this._items.forEach((it, i) => { it.tabIndex = i === 0 ? 0 : -1; });
+    this.addEventListener('keydown', (e) => this._onKey(e));
+    this.addEventListener('focusin', (e) => {
+      const i = this._items.indexOf(e.target);
+      if (i >= 0) this._set(i);
+    });
+  }
+  _set(i) {
+    const n = this._items.length;
+    this._index = (i + n) % n;
+    this._items.forEach((it, j) => { it.tabIndex = j === this._index ? 0 : -1; });
+  }
+  _focus(i) { this._set(i); this._items[this._index].focus(); }
+  _onKey(e) {
+    const next = this._vertical ? 'ArrowDown' : 'ArrowRight';
+    const prev = this._vertical ? 'ArrowUp' : 'ArrowLeft';
+    switch (e.key) {
+      case next: e.preventDefault(); this._focus(this._index + 1); break;
+      case prev: e.preventDefault(); this._focus(this._index - 1); break;
+      case 'Home': e.preventDefault(); this._focus(0); break;
+      case 'End': e.preventDefault(); this._focus(this._items.length - 1); break;
+    }
+  }
+}
+
+// --- Toast region: a live region with a push API; each toast is status or alert ---
+class GraspToastRegion extends HTMLElement {
+  connectedCallback() {
+    if (this._built) return;
+    this._built = true;
+    this.classList.add('grasp-toast-region');
+    this.setAttribute('aria-live', this.hasAttribute('assertive') ? 'assertive' : 'polite');
+    this.setAttribute('aria-atomic', 'false');
+  }
+  show(message, opts = {}) {
+    const t = document.createElement('div');
+    t.className = 'grasp-toast' + (opts.variant ? ' grasp-toast--' + opts.variant : '');
+    t.setAttribute('role', opts.assertive ? 'alert' : 'status');
+    const text = document.createElement('span');
+    text.className = 'grasp-toast__text';
+    text.textContent = message;
+    t.appendChild(text);
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'grasp-toast__close';
+    close.setAttribute('aria-label', 'Dismiss');
+    close.textContent = '×';
+    close.addEventListener('click', () => this._dismiss(t));
+    t.appendChild(close);
+    this.appendChild(t);
+    const duration = opts.duration == null ? 5000 : opts.duration;
+    if (duration > 0) t._timer = setTimeout(() => this._dismiss(t), duration);
+    return t;
+  }
+  _dismiss(t) {
+    if (t._timer) clearTimeout(t._timer);
+    t.remove();
+  }
+}
+
+// Convenience: push a toast onto a default region, creating it on first use.
+function toast(message, opts = {}) {
+  if (typeof document === 'undefined') return null;
+  let region = document.querySelector('grasp-toast-region[data-default]');
+  if (!region) {
+    region = document.createElement('grasp-toast-region');
+    region.setAttribute('data-default', '');
+    document.body.appendChild(region);
+  }
+  return region.show(message, opts);
+}
+
+// --- Popover: the native Popover API for behavior, a shim only for placement ---
+class GraspPopover extends HTMLElement {
+  connectedCallback() {
+    if (this._built) return;
+    this._built = true;
+    this.classList.add('grasp-popover');
+    this._trigger = this.querySelector('.grasp-popover__trigger') || this.querySelector('button');
+    this._panel = this.querySelector('.grasp-popover__panel') || this.querySelector('[popover]');
+    if (!this._trigger || !this._panel) return;
+    if (!this._panel.id) this._panel.id = nextId('grasp-popover');
+    this._panel.classList.add('grasp-popover__panel');
+    if (!this._panel.hasAttribute('popover')) this._panel.setAttribute('popover', '');
+    this._trigger.setAttribute('popovertarget', this._panel.id);
+    this._trigger.setAttribute('aria-expanded', 'false');
+    // The native Popover API drives show/hide, light-dismiss, Escape, and the
+    // top layer; the toggle event lets us reflect state and place the panel.
+    this._panel.addEventListener('toggle', (e) => {
+      const open = e.newState === 'open';
+      this._trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open) this._position();
+    });
+  }
+  _position() {
+    const r = this._trigger.getBoundingClientRect();
+    this._panel.style.position = 'fixed';
+    this._panel.style.margin = '0';
+    this._panel.style.top = (r.bottom + 6) + 'px';
+    this._panel.style.left = r.left + 'px';
+  }
+}
+
 if (typeof window !== 'undefined' && window.customElements) {
   const defs = {
     'grasp-field': GraspField,
@@ -378,10 +492,13 @@ if (typeof window !== 'undefined' && window.customElements) {
     'grasp-tooltip': GraspTooltip,
     'grasp-accordion': GraspAccordion,
     'grasp-combobox': GraspCombobox,
+    'grasp-toolbar': GraspToolbar,
+    'grasp-toast-region': GraspToastRegion,
+    'grasp-popover': GraspPopover,
   };
   for (const [tag, cls] of Object.entries(defs)) {
     if (!customElements.get(tag)) customElements.define(tag, cls);
   }
 }
 
-export { GraspField, GraspModal, GraspMenu, GraspTabs, GraspTooltip, GraspAccordion, GraspCombobox };
+export { GraspField, GraspModal, GraspMenu, GraspTabs, GraspTooltip, GraspAccordion, GraspCombobox, GraspToolbar, GraspToastRegion, GraspPopover, toast };
