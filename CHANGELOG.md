@@ -4,6 +4,11 @@ All notable changes to HASP are recorded here. This project has not yet cut a nu
 
 ## Unreleased
 
+### Added
+
+- **hasp-guard**, the headers and integrity instrument: a zero-dependency generator for the client-surface security posture. `csp()` builds an effective Content-Security-Policy (no `unsafe-inline` or `unsafe-eval`; inline code by nonce or hash), `securityHeaders()` returns the full recommended set, and `headerConfig(target)` emits it as vercel, netlify, or nginx configuration. Markup helpers cover Subresource Integrity and safe cross-origin links.
+- **hardened.js**, the HASP auditor, now lives in this repo (the home of all HASP code) rather than in MISSING. It checks a served response across the three altitudes for effectiveness rather than presence, and is composed into MISSING's whole-surface conformance auditor. A run of it over `hasp-guard`'s output clears the header tiers, the two are tested as a pair.
+
 ### Changed
 
 - Any key whose provider is not recognized is now held as `other` instead of being silently labeled `anthropic`. The stored provider is never a privileged guess. This makes "any-provider" literally true: HASP holds any key and never mislabels it.
