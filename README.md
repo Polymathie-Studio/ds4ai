@@ -1,6 +1,11 @@
 # GRACE
 
 <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/grace-overview-dark.svg">
+  <img alt="GRACE overview: why it exists (AI ships the happy path and skips the moments around it, so a list shows a blank, a fetch a bare spinner, a failure a white screen), the four states (skeleton, empty, error, not-found) rendered honestly and accessibly, that it is the reusable form of LUCID's off-happy-path principle, and how it differs from a bare spinner, a no-data message, a white screen, and a raw code." src="assets/grace-overview-light.svg" width="1200">
+</picture>
+
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/grace-render-dark.png">
   <img alt="GRACE rendering the four off-happy-path states: a skeleton placeholder, an empty state with a next-step action, an error state with a retry, and a not-found state pointing somewhere real." src="assets/grace-render-light.png" width="900">
 </picture>
@@ -78,7 +83,7 @@ GRACE is one instrument in **DS4AI, the Design Suite for AI, from [Polymathie-St
 - **[TEMPER](https://github.com/Polymathie-Studio/temper)**: perceivable, color and design tokens
 - **[GRASP](https://github.com/Polymathie-Studio/grasp)**: operable, interaction components
 - **[LUCID](https://github.com/Polymathie-Studio/lucid)** + **[GRACE](https://github.com/Polymathie-Studio/grace)**: honest off the happy path, disclosure and state components
-- **[HASP](https://github.com/Polymathie-Studio/hasp)**: key privacy, bring-your-own-key
+- **[HASP](https://github.com/Polymathie-Studio/hasp)**: hardened, client-surface security posture
 - **[BEACON](https://github.com/Polymathie-Studio/beacon)**: findable, head metadata and site files
 - **[FLEET](https://github.com/Polymathie-Studio/fleet)**: fast and stable, delivery
 
