@@ -1,6 +1,11 @@
 # GRASP
 
 <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/grasp-overview-dark.svg">
+  <img alt="GRASP overview: why it exists (a div is not a button, a modal with no focus trap locks out the keyboard, a field with no label is silent to a screen reader), what it provides (twenty-one native-first accessible components across the WAI-ARIA common working set, themed by TEMPER), that keyboard and screen-reader behavior come from the platform, and how it differs from div soup, UI kits, headless libraries, and nothing." src="assets/grasp-overview-light.svg" width="1200">
+</picture>
+
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/grasp-render-dark.png">
   <img alt="GRASP components: a row of button variants, a form field with its label, hint, and error wired, and an open menu with keyboard-navigable items." src="assets/grasp-render-light.png" width="900">
 </picture>
@@ -102,7 +107,7 @@ GRASP is one instrument in **DS4AI, the Design Suite for AI, from [Polymathie-St
 - **[TEMPER](https://github.com/Polymathie-Studio/temper)**: perceivable, color and design tokens
 - **[GRASP](https://github.com/Polymathie-Studio/grasp)**: operable, interaction components
 - **[LUCID](https://github.com/Polymathie-Studio/lucid)** + **[GRACE](https://github.com/Polymathie-Studio/grace)**: honest off the happy path, disclosure and state components
-- **[HASP](https://github.com/Polymathie-Studio/hasp)**: key privacy, bring-your-own-key
+- **[HASP](https://github.com/Polymathie-Studio/hasp)**: hardened, client-surface security posture
 - **[BEACON](https://github.com/Polymathie-Studio/beacon)**: findable, head metadata and site files
 - **[FLEET](https://github.com/Polymathie-Studio/fleet)**: fast and stable, delivery
 

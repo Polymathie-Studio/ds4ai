@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="system-ui, -apple-system, sans-serif">
+<rect width="1200" height="640" fill="#14161A"/>
+<text x="60" y="78" font-size="44" font-weight="700" fill="#EFF1F4">GRASP</text>
+<text x="225" y="78" font-size="20"  fill="#B8BABD">Generally Reachable And Semantically Precise</text>
+<text x="60" y="112" font-size="18" font-style="italic" fill="#76A9EE">The controls AI builds get wrong, built right.</text>
+<rect x="60" y="145" width="330" height="300" rx="10" fill="#25282C" stroke="#313438"/>
+<text x="84" y="185" font-size="16" font-weight="700" fill="#B8BABD">Why It Exists</text>
+<text x="84" y="218" font-size="17" font-weight="600" fill="#EFF1F4">A div is not a button.</text>
+<text x="84" y="240" font-size="15"  fill="#B8BABD">It is not focusable and not</text>
+<text x="84" y="260" font-size="15"  fill="#B8BABD">keyboard-operable.</text>
+<text x="84" y="296" font-size="17" font-weight="600" fill="#EFF1F4">A modal with no trap</text>
+<text x="84" y="318" font-size="15"  fill="#B8BABD">opens but locks the keyboard</text>
+<text x="84" y="338" font-size="15"  fill="#B8BABD">out of what it opened.</text>
+<text x="84" y="374" font-size="17" font-weight="600" fill="#EFF1F4">A field with no label</text>
+<text x="84" y="396" font-size="15"  fill="#B8BABD">is silent to the screen</text>
+<text x="84" y="416" font-size="15"  fill="#B8BABD">reader that reaches it.</text>
+<rect x="420" y="145" width="400" height="300" rx="10" fill="#25282C" stroke="#313438"/>
+<text x="444" y="185" font-size="16" font-weight="700" fill="#B8BABD">What It Provides</text>
+<text x="444" y="220" font-size="16" font-weight="600" fill="#EFF1F4">Twenty-one components</text>
+<text x="444" y="240" font-size="15"  fill="#B8BABD">the WAI-ARIA common working set</text>
+<text x="444" y="272" font-size="16" font-weight="600" fill="#EFF1F4">Native-first</text>
+<text x="444" y="292" font-size="15"  fill="#B8BABD">a real button, the native dialog modal</text>
+<text x="444" y="324" font-size="16" font-weight="600" fill="#EFF1F4">Themed by TEMPER</text>
+<text x="444" y="344" font-size="15"  fill="#B8BABD">one CSS file, a visible focus ring</text>
+<text x="444" y="378" font-size="15"  fill="#B8BABD">Button, Field, Modal, Menu, form controls,</text>
+<text x="444" y="398" font-size="15"  fill="#B8BABD">Tabs, Tooltip, Accordion, Combobox, Slider,</text>
+<text x="444" y="418" font-size="15"  fill="#B8BABD">and the rest, framework-agnostic plus React.</text>
+<rect x="850" y="145" width="290" height="300" rx="10" fill="#25282C" stroke="#313438"/>
+<text x="874" y="185" font-size="16" font-weight="700" fill="#B8BABD">Built On The Platform</text>
+<text x="874" y="236" font-size="40" font-weight="700" fill="#74AE80">21</text>
+<text x="874" y="264" font-size="15"  fill="#B8BABD">components across the</text>
+<text x="874" y="284" font-size="15"  fill="#B8BABD">common working set.</text>
+<text x="874" y="324" font-size="17" font-weight="600" fill="#EFF1F4">Semantic first</text>
+<text x="874" y="346" font-size="15"  fill="#B8BABD">a custom widget only where</text>
+<text x="874" y="366" font-size="15"  fill="#B8BABD">the platform has none.</text>
+<text x="874" y="400" font-size="17" font-weight="600" fill="#EFF1F4">Keyboard and reader</text>
+<text x="874" y="422" font-size="15"  fill="#B8BABD">come from the element,</text>
+<text x="874" y="442" font-size="15"  fill="#B8BABD">not hand-rolled ARIA.</text>
+<rect x="60" y="480" width="1080" height="110" rx="10" fill="#25282C" stroke="#313438"/>
+<text x="84" y="516" font-size="16" font-weight="700" fill="#B8BABD">Against the Field</text>
+<text x="84" y="544" font-size="16" font-weight="600" fill="#76A9EE">vs div soup</text>
+<text x="84" y="564" font-size="14"  fill="#B8BABD">real elements,</text>
+<text x="84" y="581" font-size="14"  fill="#B8BABD">reachable by anything</text>
+<text x="349" y="544" font-size="16" font-weight="600" fill="#76A9EE">vs UI kits</text>
+<text x="349" y="564" font-size="14"  fill="#B8BABD">zero-dependency,</text>
+<text x="349" y="581" font-size="14"  fill="#B8BABD">nothing calls home</text>
+<text x="614" y="544" font-size="16" font-weight="600" fill="#76A9EE">vs headless</text>
+<text x="614" y="564" font-size="14"  fill="#B8BABD">the ARIA is wired,</text>
+<text x="614" y="581" font-size="14"  fill="#B8BABD">not left to you</text>
+<text x="879" y="544" font-size="16" font-weight="600" fill="#76A9EE">vs nothing</text>
+<text x="879" y="564" font-size="14"  fill="#B8BABD">the keyboard user</text>
+<text x="879" y="581" font-size="14"  fill="#B8BABD">gets in</text>
+<text x="1140" y="622" font-size="13" fill="#B8BABD" text-anchor="end">Apache-2.0 &#183; part of DS4AI, the Design Suite for AI</text>
+</svg>
