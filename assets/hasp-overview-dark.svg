@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="system-ui, -apple-system, sans-serif">
+<rect width="1200" height="640" fill="#14161A"/>
+<text x="60" y="78" font-size="44" font-weight="700" fill="#EFF1F4">HASP</text>
+<text x="195" y="78" font-size="20"  fill="#B8BABD">Client-surface hardening, declared and checked</text>
+<text x="60" y="112" font-size="18" font-style="italic" fill="#76A9EE">The hardening a page declares to the browser, checked for effect.</text>
+<rect x="60" y="145" width="330" height="300" rx="10" fill="#25282C" stroke="#313438"/>
+<text x="84" y="185" font-size="16" font-weight="700" fill="#B8BABD">Why It Exists</text>
+<text x="84" y="218" font-size="17" font-weight="600" fill="#EFF1F4">Fast builds skip it.</text>
+<text x="84" y="240" font-size="15"  fill="#B8BABD">They optimize the visible app</text>
+<text x="84" y="260" font-size="15"  fill="#B8BABD">and never touch the response.</text>
+<text x="84" y="296" font-size="17" font-weight="600" fill="#EFF1F4">The headers a browser</text>
+<text x="84" y="318" font-size="15"  fill="#B8BABD">would enforce are simply</text>
+<text x="84" y="338" font-size="15"  fill="#B8BABD">absent from the response.</text>
+<text x="84" y="374" font-size="17" font-weight="600" fill="#EFF1F4">And present is not enough:</text>
+<text x="84" y="396" font-size="15"  fill="#B8BABD">a CSP with unsafe-inline, a</text>
+<text x="84" y="416" font-size="15"  fill="#B8BABD">tiny HSTS, certify nothing.</text>
+<rect x="420" y="145" width="400" height="300" rx="10" fill="#25282C" stroke="#313438"/>
+<text x="444" y="185" font-size="16" font-weight="700" fill="#B8BABD">What It Covers</text>
+<text x="444" y="220" font-size="16" font-weight="600" fill="#EFF1F4">Response headers</text>
+<text x="444" y="240" font-size="15"  fill="#B8BABD">CSP, clickjacking, HSTS, nosniff</text>
+<text x="444" y="272" font-size="16" font-weight="600" fill="#EFF1F4">Markup integrity</text>
+<text x="444" y="292" font-size="15"  fill="#B8BABD">SRI, rel=noopener, no mixed content</text>
+<text x="444" y="324" font-size="16" font-weight="600" fill="#EFF1F4">Secrets</text>
+<text x="444" y="344" font-size="15"  fill="#B8BABD">no keys in the bundle, keys in the browser</text>
+<text x="444" y="378" font-size="15"  fill="#B8BABD">The keys part is HASP-KEY, shipped as the</text>
+<text x="444" y="398" font-size="15"  fill="#B8BABD">hasp-key package. The auditor checks all</text>
+<text x="444" y="418" font-size="15"  fill="#B8BABD">three; the header generators come next.</text>
+<rect x="850" y="145" width="290" height="300" rx="10" fill="#25282C" stroke="#313438"/>
+<text x="874" y="185" font-size="16" font-weight="700" fill="#B8BABD">The Honest Limit</text>
+<text x="874" y="236" font-size="40" font-weight="700" fill="#74AE80">3 altitudes</text>
+<text x="874" y="264" font-size="15"  fill="#B8BABD">headers, integrity, secrets,</text>
+<text x="874" y="284" font-size="15"  fill="#B8BABD">checked for effect.</text>
+<text x="874" y="324" font-size="17" font-weight="600" fill="#EFF1F4">Never "secure"</text>
+<text x="874" y="346" font-size="15"  fill="#B8BABD">it states what was checked,</text>
+<text x="874" y="366" font-size="15"  fill="#B8BABD">not that a site is safe.</text>
+<text x="874" y="400" font-size="17" font-weight="600" fill="#EFF1F4">Header over meta</text>
+<text x="874" y="422" font-size="15"  fill="#B8BABD">reads the served response,</text>
+<text x="874" y="442" font-size="15"  fill="#B8BABD">not an injected tag.</text>
+<rect x="60" y="480" width="1080" height="110" rx="10" fill="#25282C" stroke="#313438"/>
+<text x="84" y="516" font-size="16" font-weight="700" fill="#B8BABD">Against the Field</text>
+<text x="84" y="544" font-size="16" font-weight="600" fill="#76A9EE">vs a security kit</text>
+<text x="84" y="564" font-size="14"  fill="#B8BABD">zero-dependency,</text>
+<text x="84" y="581" font-size="14"  fill="#B8BABD">nothing calls home</text>
+<text x="349" y="544" font-size="16" font-weight="600" fill="#76A9EE">vs a scanner</text>
+<text x="349" y="564" font-size="14"  fill="#B8BABD">a self-audit, not a</text>
+<text x="349" y="581" font-size="14"  fill="#B8BABD">scan-anyone weapon</text>
+<text x="614" y="544" font-size="16" font-weight="600" fill="#76A9EE">vs a secure badge</text>
+<text x="614" y="564" font-size="14"  fill="#B8BABD">states what was checked,</text>
+<text x="614" y="581" font-size="14"  fill="#B8BABD">re-provable</text>
+<text x="879" y="544" font-size="16" font-weight="600" fill="#76A9EE">vs nothing</text>
+<text x="879" y="564" font-size="14"  fill="#B8BABD">the surface declares</text>
+<text x="879" y="581" font-size="14"  fill="#B8BABD">its posture at last</text>
+<text x="1140" y="622" font-size="13" fill="#B8BABD" text-anchor="end">Apache-2.0 &#183; part of DS4AI, the Design Suite for AI</text>
+</svg>
