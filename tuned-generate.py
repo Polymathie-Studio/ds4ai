@@ -16,6 +16,21 @@ live call is the key-holder; locally that is you, in your own terminal.
 """
 import os, sys, json, argparse
 
+HERE = os.path.dirname(os.path.abspath(__file__))
+
+def _load_env_file():
+    """Load KEY=VALUE lines from a local .env.local or .env into the environment,
+    without overriding anything already set. Values are read, never printed."""
+    for fn in (".env.local", ".env"):
+        p = os.path.join(HERE, fn)
+        if not os.path.exists(p):
+            continue
+        for line in open(p):
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                k, v = line.split("=", 1)
+                os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
 # Pre-load the opposite of the model's measured pulls (see the pull-profile /
 # drift signatures). This is the compensation step expressed as instruction.
 COMPENSATION = (
@@ -73,6 +88,7 @@ def build_request(cb, task):
 
 def call_model(system, user, model, max_tokens):
     import urllib.request
+    _load_env_file()
     key = os.environ.get("ANTHROPIC_API_KEY")
     if not key:
         sys.exit("ANTHROPIC_API_KEY is not set in this environment.\n"

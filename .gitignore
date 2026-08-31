@@ -9,6 +9,11 @@ corpus/lexicons/
 corpus/pos-features.json
 corpus/features.npz
 
+# Secrets: the user's API key file, never committed. Read at runtime only.
+.env
+.env.*
+!.env.example
+
 # Environments and binaries.
 .venv/
 nltk_data/
