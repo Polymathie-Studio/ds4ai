@@ -72,9 +72,12 @@ def verify(text, copybook):
     # CRAFT construction grammar 9.2: distinguish accidental drift from adversarial.
     # Targets met but a pull bound exceeded is the gaming case (hitting the numbers
     # while the pulls slip), which is a stronger signal than an ordinary miss.
+    # Adversarial is the gaming case: the targets positively LANDED while a pull
+    # bound slipped. Targets merely not-drifted-because-indeterminate is not that.
+    targets_met = bool(target_results) and not drifted and not indet
     response = "accept"
     if verdict == "rejected":
-        response = "adversarial" if (drift_exceeded and not drifted) else "regenerate"
+        response = "adversarial" if (drift_exceeded and targets_met) else "regenerate"
 
     return {
         "verdict": verdict,
