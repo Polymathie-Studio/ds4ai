@@ -1,6 +1,6 @@
 {
   "name": "expository-analytical",
-  "note": "A first example copybook, targets loosely set from the derivation's expository cluster. Not calibrated; illustrative.",
+  "note": "A first example copybook, targets loosely set from the derivation's expository cluster. Not calibrated; illustrative. It sets no style preferences: banning em dashes and the like are per-author choices (see personal-standards.json), never TUNED defaults.",
   "targets": {
     "formality_F": {"target": 68, "tolerance": 8},
     "concreteness_anchor": {"target": 45, "tolerance": 25},
@@ -8,14 +8,11 @@
     "short_sentence_share_pct": {"target": 8, "tolerance": 8},
     "certainty_net": {"target": 0, "tolerance": 8}
   },
-  "preferences": {
-    "em_dash_count": {"max": 0}
-  },
+  "preferences": {},
   "drift_bounds": {
     "the_opener_pct": {"max": 14},
     "is_exactly_per1k": {"max": 0.5},
     "not_just_per1k": {"max": 1.0},
-    "rather_than_per1k": {"max": 3.5},
     "filler_per1k": {"max": 0.6}
   }
 }

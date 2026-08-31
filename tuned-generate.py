@@ -31,14 +31,16 @@ def _load_env_file():
                 k, v = line.split("=", 1)
                 os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 
-# Pre-load the opposite of the model's measured pulls (see the pull-profile /
-# drift signatures). This is the compensation step expressed as instruction.
+# Pre-load the opposite of the model's MEASURED pulls (see the pull-profile /
+# drift signatures). This compensates what the model over-produces; it is not a
+# place for any author's personal style rules, which belong in a copybook.
+# (The filler-word list is the model's genuine over-production, but the exact
+# words came from one author's banlist and are tunable, not universal.)
 COMPENSATION = (
     "Before anything else, correct for your own known drifts as a writer.\n"
     "- Vary how sentences open. Do not begin a run of sentences the same way, and do not lean on 'the' as a default opener.\n"
     "- Do not settle into a repeated phrasing or a signature construction; avoid locking onto 'is exactly', 'not just X but Y', and similar templates.\n"
-    "- Do not use the filler words genuinely, honestly, straightforward, importantly, certainly, absolutely, fascinating.\n"
-    "- Use antithesis (rather than, not X but Y) sparingly, as a marked effect, never as a default rhythm.\n"
+    "- Do not over-insert filler words the model tends to reach for by default, such as genuinely, honestly, importantly, certainly, absolutely.\n"
     "- Do not open with a bold claim and a soft tail, and do not end on an aphoristic kicker.\n"
     "- Write as a person addressing a reader, not as a summary of a topic."
 )
