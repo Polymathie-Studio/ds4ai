@@ -9,12 +9,18 @@ corpus/lexicons/
 corpus/pos-features.json
 corpus/features.npz
 
-# Secrets: the user's API key file, never committed. Read at runtime only.
+# Secrets: any key file, never committed. Read at runtime only. The engine reads
+# .env.local; other .local names (e.g. a mistyped env.local) are caught too.
 .env
 .env.*
+*.local
 !.env.example
 
-# Environments and binaries.
+# Environments, caches, and junk.
 .venv/
 nltk_data/
+__pycache__/
+*.pyc
+.DS_Store
+echo
 *.pdf
