@@ -55,9 +55,14 @@ def verify(text, copybook):
     pref_fail = [n for n, (r, _) in pref_results.items() if r == "fail"]
     drift_exceeded = [n for n, (r, _) in drift_results.items() if r == "exceeded"]
 
-    if not reliable:
+    # CRAFT resolution floor (Condition 3): below the noise floor the statistical
+    # dials are indeterminate, but the determinate-resolution class (hard
+    # preferences and the discrete drift signatures) stays valid at any length.
+    if pref_fail or drift_exceeded:
+        verdict = "rejected"
+    elif not reliable:
         verdict = "indeterminate"
-    elif drifted or pref_fail or drift_exceeded:
+    elif drifted:
         verdict = "rejected"
     elif indet:
         verdict = "indeterminate"
