@@ -43,18 +43,38 @@ def succeeded(v):
     return v["verdict"] == "indeterminate" and not m.get("drift_exceeded") and not m.get("preference_fail") and not m.get("drifted")
 
 
-def run(cb, task, model, max_tokens, max_iters):
+def miss_score(v):
+    """Lower is less drifted. Hard determinate misses (a failed preference, a
+    slipped pull) weigh more than a statistical dial being off."""
+    m = v.get("misses", {})
+    return 2 * (len(m.get("preference_fail", [])) + len(m.get("drift_exceeded", []))) + len(m.get("drifted", []))
+
+
+def persistent_misses(v):
+    m = v.get("misses", {})
+    return {k: m[k] for k in ("preference_fail", "drift_exceeded", "drifted") if m.get(k)}
+
+
+def run(cb, task, model, max_tokens, max_iters, on_iter=None):
+    """Iterate generate/verify/correct. Return the BEST draft seen (convergence
+    is not monotonic, so the last is not necessarily the least drifted) with a
+    converged flag; on the cap the caller escalates rather than shipping drift."""
     system, user = gen.build_request(cb, task)
-    draft, v = None, None
+    best = None
     for i in range(1, max_iters + 1):
         draft = gen.call_model(system, user, model, max_tokens)
         v = verify(draft, cb)
-        yield i, draft, v
+        if on_iter:
+            on_iter(i, v)
+        s = miss_score(v)
+        if best is None or s < best["score"]:
+            best = {"score": s, "iter": i, "draft": draft, "v": v}
         if succeeded(v):
-            return
-        fix = corrective(v)
+            return {"score": s, "iter": i, "draft": draft, "v": v, "converged": True}
         user = (f"{task}\n\nHere is a draft:\n\n{draft}\n\n"
-                f"Revise it to fix these specific problems, keeping everything else: {fix}")
+                f"Revise it to fix these specific problems, keeping everything else: {corrective(v)}")
+    best["converged"] = False
+    return best
 
 
 if __name__ == "__main__":
@@ -67,11 +87,18 @@ if __name__ == "__main__":
     a = ap.parse_args()
     cb = json.load(open(a.copybook))
     task = open(a.task).read() if os.path.exists(a.task) else a.task
-    final = None
-    for i, draft, v in run(cb, task, a.model, a.max_tokens, a.max_iters):
+    def show(i, v):
         print(f"--- iteration {i}: verdict {v['verdict']}, response {v.get('response')}, "
-              f"misses {[k for k,val in v['misses'].items() if val]} ---")
-        final = (draft, v)
-    print("\n=== FINAL ===")
-    print(final[0])
-    print(f"\n[{'converged' if succeeded(final[1]) else 'hit iteration cap'} in the loop]")
+              f"misses {[k for k, val in v['misses'].items() if val]} ---")
+
+    res = run(cb, task, a.model, a.max_tokens, a.max_iters, on_iter=show)
+    print("\n=== FINAL (best draft) ===")
+    print(res["draft"])
+    if res["converged"]:
+        print(f"\n[converged at iteration {res['iter']}]")
+    else:
+        pm = persistent_misses(res["v"])
+        print(f"\n[did not converge in {a.max_iters} passes. Best draft is from iteration "
+              f"{res['iter']}. These would not zero: {pm}. That usually means the copybook "
+              f"target is unreachable for this content or two targets conflict, which is a "
+              f"writer's call: review the draft, or adjust the copybook. (CRAFT double-loop.)]")
