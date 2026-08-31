@@ -99,8 +99,12 @@ def call_model(system, user, model, max_tokens):
     req = urllib.request.Request("https://api.anthropic.com/v1/messages", data=body,
                                  headers={"x-api-key": key, "anthropic-version": "2023-06-01",
                                           "content-type": "application/json"})
-    with urllib.request.urlopen(req) as r:
-        resp = json.load(r)
+    try:
+        with urllib.request.urlopen(req) as r:
+            resp = json.load(r)
+    except urllib.error.HTTPError as e:
+        detail = e.read().decode(errors="ignore")
+        sys.exit(f"API error {e.code}: {detail}")
     return "".join(b.get("text", "") for b in resp.get("content", []))
 
 
