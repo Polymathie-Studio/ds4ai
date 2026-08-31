@@ -1,0 +1,15 @@
+# Corpus text: other writers' copyrighted prose, not for redistribution.
+corpus/raw/*.txt
+
+# Lexicons: NRC-VAD is explicitly no-redistribution (non-commercial research use
+# only); Brysbaert kept local pending a license check. Never commit these.
+corpus/lexicons/
+
+# Derived data (regenerable by the scripts).
+corpus/pos-features.json
+corpus/features.npz
+
+# Environments and binaries.
+.venv/
+nltk_data/
+*.pdf
