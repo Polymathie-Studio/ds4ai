@@ -1,0 +1,54 @@
+{
+  "name": "hasp-key",
+  "version": "0.1.0",
+  "description": "HASP: Hold Any-provider Secrets Privately. A bring-your-own-key holder for AI apps. Your key stays in your browser, never on a server.",
+  "keywords": [
+    "byok",
+    "api-key",
+    "anthropic",
+    "openai",
+    "ai",
+    "bring-your-own-key",
+    "provider"
+  ],
+  "license": "Apache-2.0",
+  "author": "Regis Lloyd Chapman",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "default": "./dist/react.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "NOTICE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test",
+    "prepublishOnly": "tsc"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "typescript": "^5.6.0"
+  }
+}
