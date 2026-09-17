@@ -1,0 +1,26 @@
+# Corpus text: other writers' copyrighted prose, not for redistribution.
+corpus/raw/*.txt
+
+# Lexicons: NRC-VAD is explicitly no-redistribution (non-commercial research use
+# only); Brysbaert kept local pending a license check. Never commit these.
+corpus/lexicons/
+
+# Derived data (regenerable by the scripts).
+corpus/pos-features.json
+corpus/features.npz
+
+# Secrets: any key file, never committed. Read at runtime only. The engine reads
+# .env.local; other .local names (e.g. a mistyped env.local) are caught too.
+.env
+.env.*
+*.local
+!.env.example
+
+# Environments, caches, and junk.
+.venv/
+nltk_data/
+__pycache__/
+*.pyc
+.DS_Store
+echo
+*.pdf
