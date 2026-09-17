@@ -1,0 +1,13 @@
+# Changelog
+
+All notable changes to FLEET are recorded here. This project has not yet cut a numbered release; changes below are unreleased. FLEET is in progress toward its primitizable delivery set (see the scope note); this is Tier 1.
+
+## Unreleased
+
+### Added
+
+- Tier 3, the delivery auditor and Speculation Rules, completing the primitizable set (Tiers 1 to 3): `audit(html)` scans a page's HTML and returns `{ ok, errors, warnings, passed }`, flagging images without width or height, a lazy-loaded first (likely LCP) image, render-blocking scripts in the head, and inline `@font-face` without `font-display`. Delivery issues are advisory, so most land as warnings. `speculationRules(rules)` emits a Speculation Rules script for prefetch or prerender, labeled emerging and Chromium-only, degrading to nothing elsewhere. The React binding adds `SpeculationRules`; the auditor is a checker with no component. FLEET now covers its primitizable delivery set and stays 0.x until a numbered release is cut.
+- Tier 2, the head tags and cache config: `hints(list)` emits resource-hint link tags (with the helpers `preconnect`, `dnsPrefetch`, `preload`, `modulePreload`, and `fontPreload`, which sets the required crossorigin for CORS-mode font fetches). `fontFace(data)` builds an `@font-face` CSS block with `font-display` and the metric overrides for a zero-shift swap. `cacheHeaders(target, opts)` generates the cache pattern (revalidate HTML, cache hashed assets for a year as immutable) for netlify, vercel, or nginx. The React binding adds `Hints` and re-exports `fontFace` and `cacheHeaders`. The cache config and font-face are strings the caller writes, so they have no component.
+- Tier 1, the responsive-image and picture emitter: `img(data)` returns an `<img>` with reserved width and height, `srcset`, `sizes`, `decoding="async"`, and correct scheduling: `priority: true` marks the LCP image eager and high priority, `lazy: true` marks offscreen images, and an image that is neither is left at the browser default (eager), so FLEET never emits a lazy LCP image by default. `picture(data)` negotiates AVIF and WebP formats (as `avif`/`webp` shortcuts or a full `sources` array) with the fallback `<img>` built from the same data. `srcset(base, widths)` builds a srcset string. The React binding (`fleet-ui/react`) adds `Img` and `Picture` and re-exports `srcset`.
+- The boundary, stated in code and docs: FLEET emits delivery markup, and does not compress images, bundle JavaScript, or set cache headers, which are build-tool and server work. FLEET emits the markup that points at the built assets.
+- Family hygiene: Apache-2.0 license and notice, zero-dependency core, framework binding as an optional peer, and the Polymathie family section in the README.

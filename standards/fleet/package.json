@@ -1,0 +1,25 @@
+{
+  "name": "fleet-ui",
+  "version": "0.1.0",
+  "description": "FLEET: delivery for shipped pages. A build and SSR-time generator for correct responsive-image and picture markup, resource-hint and font head tags, cache-header config, and a delivery auditor, against the Core Web Vitals. Framework-agnostic core plus a React binding. In progress toward the primitizable delivery set.",
+  "keywords": ["performance", "core-web-vitals", "lcp", "cls", "responsive-images", "lazy-loading", "delivery", "ssr"],
+  "license": "Apache-2.0",
+  "author": "Regis Lloyd Chapman",
+  "type": "module",
+  "sideEffects": false,
+  "main": "fleet.js",
+  "exports": {
+    ".": "./fleet.js",
+    "./react": {
+      "types": "./react/index.d.ts",
+      "default": "./react/index.js"
+    }
+  },
+  "files": ["fleet.js", "react/", "README.md", "NOTICE"],
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": { "optional": true }
+  }
+}

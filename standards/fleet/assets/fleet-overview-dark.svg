@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="system-ui, -apple-system, sans-serif">
+<rect width="1200" height="640" fill="#14161A"/>
+<text x="60" y="78" font-size="44" font-weight="700" fill="#EFF1F4">FLEET</text>
+<text x="210" y="78" font-size="20"  fill="#B8BABD">Fast Loads, Every Element Timed</text>
+<text x="60" y="112" font-size="18" font-style="italic" fill="#76A9EE">Fast and stable, and honest about its edge.</text>
+<rect x="60" y="145" width="330" height="300" rx="10" fill="#25282C" stroke="#313438"/>
+<text x="84" y="185" font-size="16" font-weight="700" fill="#B8BABD">Why It Exists</text>
+<text x="84" y="218" font-size="17" font-weight="600" fill="#EFF1F4">A page can look finished</text>
+<text x="84" y="240" font-size="15"  fill="#B8BABD">and still be slow and janky</text>
+<text x="84" y="260" font-size="15"  fill="#B8BABD">under measurement.</text>
+<text x="84" y="296" font-size="17" font-weight="600" fill="#EFF1F4">An oversized hero</text>
+<text x="84" y="318" font-size="15"  fill="#B8BABD">arrives late; content jumps</text>
+<text x="84" y="338" font-size="15"  fill="#B8BABD">as images and fonts load.</text>
+<text x="84" y="374" font-size="17" font-weight="600" fill="#EFF1F4">That damage is invisible</text>
+<text x="84" y="396" font-size="15"  fill="#B8BABD">until measured, which is</text>
+<text x="84" y="416" font-size="15"  fill="#B8BABD">when a fast build skips it.</text>
+<rect x="420" y="145" width="400" height="300" rx="10" fill="#25282C" stroke="#313438"/>
+<text x="444" y="185" font-size="16" font-weight="700" fill="#B8BABD">What It Emits</text>
+<text x="444" y="220" font-size="16" font-weight="600" fill="#EFF1F4">Responsive image markup</text>
+<text x="444" y="240" font-size="15"  fill="#B8BABD">reserved dimensions, correct scheduling</text>
+<text x="444" y="272" font-size="16" font-weight="600" fill="#EFF1F4">Resource hints and font tags</text>
+<text x="444" y="292" font-size="15"  fill="#B8BABD">plus a cache-header config generator</text>
+<text x="444" y="324" font-size="16" font-weight="600" fill="#EFF1F4">A delivery auditor</text>
+<text x="444" y="344" font-size="15"  fill="#B8BABD">and a Speculation Rules generator</text>
+<text x="444" y="378" font-size="15"  fill="#B8BABD">Checked against Core Web Vitals:</text>
+<text x="444" y="398" font-size="15"  fill="#B8BABD">Largest Contentful Paint, Cumulative</text>
+<text x="444" y="418" font-size="15"  fill="#B8BABD">Layout Shift, Interaction to Next Paint.</text>
+<rect x="850" y="145" width="290" height="300" rx="10" fill="#25282C" stroke="#313438"/>
+<text x="874" y="185" font-size="16" font-weight="700" fill="#B8BABD">Honest About Its Edge</text>
+<text x="874" y="236" font-size="40" font-weight="700" fill="#74AE80">Emit, audit</text>
+<text x="874" y="264" font-size="15"  fill="#B8BABD">the markup and config,</text>
+<text x="874" y="284" font-size="15"  fill="#B8BABD">never the bytes.</text>
+<text x="874" y="324" font-size="17" font-weight="600" fill="#EFF1F4">It cannot</text>
+<text x="874" y="346" font-size="15"  fill="#B8BABD">encode a pixel, bundle a</text>
+<text x="874" y="366" font-size="15"  fill="#B8BABD">module, or set a header.</text>
+<text x="874" y="400" font-size="17" font-weight="600" fill="#EFF1F4">It marks the boundary</text>
+<text x="874" y="422" font-size="15"  fill="#B8BABD">rather than pretending</text>
+<text x="874" y="442" font-size="15"  fill="#B8BABD">to cross it.</text>
+<rect x="60" y="480" width="1080" height="110" rx="10" fill="#25282C" stroke="#313438"/>
+<text x="84" y="516" font-size="16" font-weight="700" fill="#B8BABD">Against the Field</text>
+<text x="84" y="544" font-size="16" font-weight="600" fill="#76A9EE">vs perf plugins</text>
+<text x="84" y="564" font-size="14"  fill="#B8BABD">transparent markup,</text>
+<text x="84" y="581" font-size="14"  fill="#B8BABD">no black box</text>
+<text x="349" y="544" font-size="16" font-weight="600" fill="#76A9EE">vs framework defaults</text>
+<text x="349" y="564" font-size="14"  fill="#B8BABD">catches the misses</text>
+<text x="349" y="581" font-size="14"  fill="#B8BABD">they still ship</text>
+<text x="614" y="544" font-size="16" font-weight="600" fill="#76A9EE">vs a score</text>
+<text x="614" y="564" font-size="14"  fill="#B8BABD">the fix, not just</text>
+<text x="614" y="581" font-size="14"  fill="#B8BABD">a number</text>
+<text x="879" y="544" font-size="16" font-weight="600" fill="#76A9EE">vs nothing</text>
+<text x="879" y="564" font-size="14"  fill="#B8BABD">the jank is caught</text>
+<text x="879" y="581" font-size="14"  fill="#B8BABD">before ship</text>
+<text x="1140" y="622" font-size="13" fill="#B8BABD" text-anchor="end">Apache-2.0 &#183; part of DS4AI, the Design Suite for AI</text>
+</svg>
