@@ -1,0 +1,26 @@
+{
+  "name": "grace-states",
+  "version": "0.1.0",
+  "description": "GRACE: state components for the off-happy-path. Skeleton, empty, error, and not-found, accessible by default and themed by TEMPER. Framework-agnostic core plus a React binding.",
+  "keywords": ["empty-state", "error-state", "loading", "skeleton", "404", "accessibility", "graceful-degradation", "ui"],
+  "license": "Apache-2.0",
+  "author": "Regis Lloyd Chapman",
+  "type": "module",
+  "sideEffects": ["./grace.js", "*.css"],
+  "main": "grace.js",
+  "exports": {
+    ".": "./grace.js",
+    "./grace.css": "./grace.css",
+    "./react": {
+      "types": "./react/index.d.ts",
+      "default": "./react/index.js"
+    }
+  },
+  "files": ["grace.js", "grace.css", "react/", "README.md", "NOTICE"],
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": { "optional": true }
+  }
+}

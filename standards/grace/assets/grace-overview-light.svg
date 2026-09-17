@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="system-ui, -apple-system, sans-serif">
+<rect width="1200" height="640" fill="#F0F4F9"/>
+<text x="60" y="78" font-size="44" font-weight="700" fill="#17181A">GRACE</text>
+<text x="222" y="78" font-size="20"  fill="#3F4143">Graceful Rendering At every Condition, Explicit</text>
+<text x="60" y="112" font-size="18" font-style="italic" fill="#1E4E8C">The four states the happy path skips.</text>
+<rect x="60" y="145" width="330" height="300" rx="10" fill="#FFFFFF" stroke="#C9CDD1"/>
+<text x="84" y="185" font-size="16" font-weight="700" fill="#3F4143">Why It Exists</text>
+<text x="84" y="218" font-size="17" font-weight="600" fill="#17181A">AI ships the happy path</text>
+<text x="84" y="240" font-size="15"  fill="#3F4143">and skips the moments</text>
+<text x="84" y="260" font-size="15"  fill="#3F4143">around it.</text>
+<text x="84" y="296" font-size="17" font-weight="600" fill="#17181A">A list shows a blank</text>
+<text x="84" y="318" font-size="15"  fill="#3F4143">instead of nothing-yet;</text>
+<text x="84" y="338" font-size="15"  fill="#3F4143">a fetch, a bare spinner.</text>
+<text x="84" y="374" font-size="17" font-weight="600" fill="#17181A">A failed request</text>
+<text x="84" y="396" font-size="15"  fill="#3F4143">white-screens, with no</text>
+<text x="84" y="416" font-size="15"  fill="#3F4143">words and no way back.</text>
+<rect x="420" y="145" width="400" height="300" rx="10" fill="#FFFFFF" stroke="#C9CDD1"/>
+<text x="444" y="185" font-size="16" font-weight="700" fill="#3F4143">The Four States</text>
+<text x="444" y="220" font-size="16" font-weight="600" fill="#17181A">Skeleton (pending)</text>
+<text x="444" y="240" font-size="15"  fill="#3F4143">content-shaped, so layout holds</text>
+<text x="444" y="272" font-size="16" font-weight="600" fill="#17181A">Empty (absent)</text>
+<text x="444" y="292" font-size="15"  fill="#3F4143">why, and the one next step</text>
+<text x="444" y="324" font-size="16" font-weight="600" fill="#17181A">Error (failed)</text>
+<text x="444" y="344" font-size="15"  fill="#3F4143">plain language and a way back</text>
+<text x="444" y="378" font-size="15"  fill="#3F4143">NotFound (unreachable): says it is not</text>
+<text x="444" y="398" font-size="15"  fill="#3F4143">here and points somewhere real. Accessible</text>
+<text x="444" y="418" font-size="15"  fill="#3F4143">by default, themed by TEMPER.</text>
+<rect x="850" y="145" width="290" height="300" rx="10" fill="#FFFFFF" stroke="#C9CDD1"/>
+<text x="874" y="185" font-size="16" font-weight="700" fill="#3F4143">The Reusable Form</text>
+<text x="874" y="236" font-size="40" font-weight="700" fill="#255D34">4 of 4</text>
+<text x="874" y="264" font-size="15"  fill="#3F4143">states rendered honestly,</text>
+<text x="874" y="284" font-size="15"  fill="#3F4143">none left blank.</text>
+<text x="874" y="324" font-size="17" font-weight="600" fill="#17181A">Of LUCID's principle</text>
+<text x="874" y="346" font-size="15"  fill="#3F4143">the off-happy-path posture,</text>
+<text x="874" y="366" font-size="15"  fill="#3F4143">made into components.</text>
+<text x="874" y="400" font-size="17" font-weight="600" fill="#17181A">No white screen</text>
+<text x="874" y="422" font-size="15"  fill="#3F4143">never a raw code, never</text>
+<text x="874" y="442" font-size="15"  fill="#3F4143">a silent swallow.</text>
+<rect x="60" y="480" width="1080" height="110" rx="10" fill="#FFFFFF" stroke="#C9CDD1"/>
+<text x="84" y="516" font-size="16" font-weight="700" fill="#3F4143">Against the Field</text>
+<text x="84" y="544" font-size="16" font-weight="600" fill="#1E4E8C">vs a bare spinner</text>
+<text x="84" y="564" font-size="14"  fill="#3F4143">a content-shaped</text>
+<text x="84" y="581" font-size="14"  fill="#3F4143">skeleton</text>
+<text x="349" y="544" font-size="16" font-weight="600" fill="#1E4E8C">vs no-data</text>
+<text x="349" y="564" font-size="14"  fill="#3F4143">why, and the</text>
+<text x="349" y="581" font-size="14"  fill="#3F4143">next step</text>
+<text x="614" y="544" font-size="16" font-weight="600" fill="#1E4E8C">vs a white screen</text>
+<text x="614" y="564" font-size="14"  fill="#3F4143">plain words</text>
+<text x="614" y="581" font-size="14"  fill="#3F4143">and a way back</text>
+<text x="879" y="544" font-size="16" font-weight="600" fill="#1E4E8C">vs a raw code</text>
+<text x="879" y="564" font-size="14"  fill="#3F4143">a message a</text>
+<text x="879" y="581" font-size="14"  fill="#3F4143">person can read</text>
+<text x="1140" y="622" font-size="13" fill="#3F4143" text-anchor="end">Apache-2.0 &#183; part of DS4AI, the Design Suite for AI</text>
+</svg>

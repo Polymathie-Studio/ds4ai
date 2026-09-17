@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GRACE demo</title>
+<link rel="stylesheet" href="./grace.css" />
+<style>
+  body {
+    margin: 0;
+    padding: 2.5rem 1.5rem;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--color-bg-base, #f4f6f9);
+    color: var(--color-text-primary, #1b1e22);
+  }
+  .wrap { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.75rem; }
+  .case {
+    border: 1px solid var(--color-border, #d4dae2);
+    border-radius: var(--radius-md, 10px);
+    background: var(--color-surface, #ffffff);
+    overflow: hidden;
+  }
+  .case > h2 {
+    margin: 0;
+    padding: 0.55rem 1rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.6;
+    border-bottom: 1px solid var(--color-border, #d4dae2);
+  }
+  .skeleton-demo { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.6rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="case">
+    <h2>Pending</h2>
+    <div class="skeleton-demo">
+      <div class="grace-skeleton" style="height: 1.25rem; width: 45%"></div>
+      <div class="grace-skeleton" style="height: 1rem; width: 92%"></div>
+      <div class="grace-skeleton" style="height: 1rem; width: 78%"></div>
+    </div>
+  </div>
+  <div class="case">
+    <h2>Absent</h2>
+    <grace-empty heading="No projects yet" message="Your projects will show up here once you create one." action="Create a project" href="#new"></grace-empty>
+  </div>
+  <div class="case">
+    <h2>Failed</h2>
+    <grace-error heading="That did not load" message="Something went wrong fetching your data. Try again in a moment." action="Retry"></grace-error>
+  </div>
+  <div class="case">
+    <h2>Unreachable</h2>
+    <grace-notfound heading="Page not found" message="That page does not exist or has moved." action="Back to home" href="#home"></grace-notfound>
+  </div>
+</div>
+<script type="module" src="./grace.js"></script>
+</body>
+</html>
