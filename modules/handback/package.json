@@ -1,0 +1,11 @@
+{
+  "name": "handback",
+  "version": "0.1.0",
+  "description": "Draws and holds the line between what an instrument hands back to a person and what it keeps. Content-neutral mechanism, per-build criteria.",
+  "type": "module",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "node test.mjs"
+  }
+}
