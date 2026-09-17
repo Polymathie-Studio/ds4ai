@@ -27,4 +27,4 @@ This repository consolidates the suite. Each standard lives under `standards/<na
 
 ## Machine-readable layer
 
-The suite's machine-readable layer (schemas, registers, and the family manifest) publishes to the one source at [Polymathie-Studio/tools](https://github.com/Polymathie-Studio/tools) alongside the other standards families. (Migration in progress.)
+The suite's machine-readable layer (schemas, registers, and the family manifest) lives at the one source, [Polymathie-Studio/tools](https://github.com/Polymathie-Studio/tools), as the DS4AI family manifest ([ds4ai-manifest.json](https://raw.githubusercontent.com/Polymathie-Studio/tools/main/schema/ds4ai/ds4ai-manifest.json)), alongside the other standards families.
